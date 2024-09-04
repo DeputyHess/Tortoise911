@@ -1,0 +1,21 @@
+####Yes its the Aura Prov file, I use an Aura PBX and I want to just have one auto provisioning source..
+
+##Group Redirection
+IF $GROUP SEQ 101 GOTO SUP_101
+
+# SUP_101
+SET GMTOFFSET -6:00
+##Only 0 or 2, 0 is off, 2 is on
+SET DAYLIGHT_SAVING_SETTNG_MODE 2
+SET COUNTRY USA
+SET DATEFORMAT "%m/%y"
+SET TIMEZONE America/Chicago
+SET ENABLE_TIMEZONE 1
+GOTO 912_MAIN_TEMP
+
+
+# 912_MAIN_TEMP
+GET 46xxsettings-912.txt
+GOTO END
+
+# END

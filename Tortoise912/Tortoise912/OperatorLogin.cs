@@ -72,6 +72,7 @@ namespace Tortoise912
 					}
 #endif
 				}
+				else { MessageBox.Show("Login Failure"); }
 			}
 		}
 

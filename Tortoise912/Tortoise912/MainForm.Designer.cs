@@ -85,7 +85,7 @@
 			configBUT = new Button();
 			quitbutton = new Button();
 			button12 = new Button();
-			button10 = new Button();
+			logoutbutton = new Button();
 			irrBUT = new Button();
 			volumeBUT = new Button();
 			screenclean1BUT = new Button();
@@ -739,7 +739,7 @@
 			panel1.Controls.Add(configBUT);
 			panel1.Controls.Add(quitbutton);
 			panel1.Controls.Add(button12);
-			panel1.Controls.Add(button10);
+			panel1.Controls.Add(logoutbutton);
 			panel1.Controls.Add(irrBUT);
 			panel1.Controls.Add(volumeBUT);
 			panel1.Controls.Add(screenclean1BUT);
@@ -782,16 +782,16 @@
 			button12.TabIndex = 21;
 			button12.UseVisualStyleBackColor = true;
 			// 
-			// button10
+			// logoutbutton
 			// 
-			button10.BackgroundImage = Properties.Resources.operator_icon_clipart_4;
-			button10.BackgroundImageLayout = ImageLayout.Zoom;
-			button10.Location = new Point(165, 3);
-			button10.Name = "button10";
-			button10.Size = new Size(46, 33);
-			button10.TabIndex = 20;
-			button10.UseVisualStyleBackColor = true;
-			button10.Click += button10_Click;
+			logoutbutton.BackgroundImage = Properties.Resources.operator_icon_clipart_4;
+			logoutbutton.BackgroundImageLayout = ImageLayout.Zoom;
+			logoutbutton.Location = new Point(165, 3);
+			logoutbutton.Name = "logoutbutton";
+			logoutbutton.Size = new Size(46, 33);
+			logoutbutton.TabIndex = 20;
+			logoutbutton.UseVisualStyleBackColor = true;
+			logoutbutton.Click += button10_Click;
 			// 
 			// irrBUT
 			// 
@@ -1390,7 +1390,7 @@
 		private Button configBUT;
 		private Button quitbutton;
 		private Button button12;
-		private Button button10;
+		private Button logoutbutton;
 		private Button irrBUT;
 		private Button volumeBUT;
 		private Button screenclean1BUT;

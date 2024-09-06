@@ -17,6 +17,11 @@ namespace Tortoise912
 {
 	public partial class FirstLaunch : Form
 	{
+		private bool DONT = false;
+
+		/// <summary>
+		/// Setup Window
+		/// </summary>
 		public FirstLaunch()
 		{
 			InitializeComponent();
@@ -31,18 +36,21 @@ namespace Tortoise912
 		{
 			try
 			{
-				var ping2 = new System.Net.NetworkInformation.Ping();
-				string pingurl = provurlBOX.Text.Replace($"https://", "");
-				pingurl = pingurl.Replace($"/", "");
-				var result2 = ping2.Send(pingurl);
+				if (provurlBOX.Text.Length > 0)
+				{
+					var ping2 = new System.Net.NetworkInformation.Ping();
+					string pingurl = provurlBOX.Text.Replace($"https://", "");
+					pingurl = pingurl.Replace($"/", "");
+					var result2 = ping2.Send(pingurl);
 
-				if (result2.Status == System.Net.NetworkInformation.IPStatus.Success)
-				{
-					colorbox.BackColor = Color.Green;
-				}
-				else
-				{
-					colorbox.BackColor = Color.Red;
+					if (result2.Status == System.Net.NetworkInformation.IPStatus.Success)
+					{
+						colorbox.BackColor = Color.Green;
+					}
+					else
+					{
+						colorbox.BackColor = Color.Red;
+					}
 				}
 			}
 			catch (Exception ex)
@@ -55,11 +63,22 @@ namespace Tortoise912
 		{
 			Application.UserAppDataRegistry.SetValue("PROV_GRP", provgrpBOX.Text);
 			Application.UserAppDataRegistry.SetValue("PROV_URL", provurlBOX.Text);
+			DONT = true;
 			this.Close();
 		}
 
 		private void provurlBOX_Leave(object sender, EventArgs e)
 		{
+		}
+
+		private void FirstLaunch_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (e.CloseReason == CloseReason.UserClosing && DONT == false)
+			{
+				ExitTask.Exit();
+			}
+
+			if (e.CloseReason == CloseReason.WindowsShutDown && DONT == false) { }
 		}
 	}
 }

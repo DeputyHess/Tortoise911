@@ -106,40 +106,89 @@ namespace Tortoise912
 									//SET cmd
 									//Set Setting
 
-									if (line.Contains("SET GMTOFFSET") == true) { }
-									if (line.Contains("SET DAYLIGHT_SAVING_SETTNG_MODE") == true) { }
+									if (line.Contains("SET GMTOFFSET") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(14, line.Length - 14);
+											number = Regex.Replace(number, "[\"]", string.Empty);
+											CONFstor.GMTOFFSET = number;
+										}
+									}
+									if (line.Contains("SET DAYLIGHT_SAVING_SETTNG_MODE") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(32, line.Length - 32);
+											number = Regex.Replace(number, "[\"]", string.Empty);
+											CONFstor.DAYLIGHT_SAVING_SETTNG_MODE = number;
+										}
+									}
 									if (line.Contains("SET COUNTRY") == true)
 									{
 										if (line.Contains("US") == true)
 										{
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("COUNTRY",
-												  "US");
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.COUNTRY = "US";
+										}
+										else if (line.Contains("UK") == true)
+										{
+											CONFstor.COUNTRY = "UK";
 										}
 									}
 									if (line.Contains("SET DATEFORMAT") == true) { }
 									if (line.Contains("SET TIMEZONE America/Chicago") == true) { }
 									if (line.Contains("SET ENABLE_TIMEZONE") == true) { }
-									if (line.Contains("SET SIP_CONTROLLER_LIST") == true) { }
+									if (line.Contains("SET SIP_CONTROLLER_LIST") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(24, line.Length - 24);
+											number = Regex.Replace(number, "[\"]", string.Empty);
+											CONFstor.SIP_CONTROLLER_LIST = number;
+										}
+									}
 									if (line.Contains("SET SIPSIGNAL") == true) { }
 									if (line.Contains("SET WAIT_FOR_REGISTRATION_TIMER") == true) { }
-									if (line.Contains("SET DOMAIN") == true) { }
-									if (line.Contains("SET SIPDOMAIN") == true) { }
+									if (line.Contains("SET DOMAIN") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(11, line.Length - 11);
+											number = Regex.Replace(number, "[\"]", string.Empty);
+											CONFstor.DOMAIN = number;
+										}
+									}
+									if (line.Contains("SET SIPDOMAIN") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(14, line.Length - 14);
+											number = Regex.Replace(number, "[\"]", string.Empty);
+											CONFstor.SIPDOMAIN = number;
+										}
+									}
 									if (line.Contains("SET ENABLE_PRESENCE") == true) { }
-									if (line.Contains("SET PROVIDE_LOGOUT") == true) { }
+									if (line.Contains("SET PROVIDE_LOGOUT") == true)
+									{
+										if (line.Length > 0)
+										{
+											if (line.Contains("1"))
+											{
+												CONFstor.PROVIDE_LOGOUT = true;
+											}
+											else if (line.Contains("0"))
+											{
+												CONFstor.PROVIDE_LOGOUT = false;
+											}
+										}
+									}
 									if (line.Contains("SET SIPREGPROXYPOLICY") == true) { }
 									if (line.Contains("SET SIMULTANEOUS_REGISTRATIONS") == true) { }
 									if (line.Contains("SET ENABLE_G711A") == true) { }
 									if (line.Contains("SET ENABLE_G711U") == true) { }
 									if (line.Contains("SET CODEC_PRIORITY") == true) { }
 									if (line.Contains("SET ENABLE_G722") == true) { }
-									if (line.Contains("SET UPGRADE_POLLING_PERIOD") == true)
+									/*if (line.Contains("SET UPGRADE_POLLING_PERIOD") == true)
 									{
 										if (line.Length > 0)
 										{
@@ -158,7 +207,7 @@ namespace Tortoise912
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
 #endif
-									}
+									}*/
 									if (line.Contains("SET ENABLE_L1") == true)
 									{
 										if (line.Length > 0)
@@ -166,27 +215,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L1",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L1 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L1",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L1 = false;
 											}
 										}
 #if DEBUG
@@ -200,27 +233,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L2",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L2 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L2",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L2 = false;
 											}
 										}
 #if DEBUG
@@ -234,27 +251,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L3",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L3 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L3",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L3 = false;
 											}
 										}
 #if DEBUG
@@ -268,27 +269,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L4",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L4 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L4",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L4 = false;
 											}
 										}
 #if DEBUG
@@ -302,27 +287,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L5",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L5 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L5",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L5 = false;
 											}
 										}
 #if DEBUG
@@ -336,27 +305,11 @@ namespace Tortoise912
 											number = line.Substring(14, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L6",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L6 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_L6",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_L6 = false;
 											}
 										}
 #if DEBUG
@@ -483,15 +436,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_1_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_1_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -503,15 +448,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_2_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_2_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -523,15 +460,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_3_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_3_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -543,15 +472,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_4_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_4_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -563,15 +484,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_5_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_5_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -583,15 +496,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(15, line.Length - 15);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("LINE_6_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.LINE_6_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -604,27 +509,11 @@ namespace Tortoise912
 											number = line.Substring(15, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF1",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF1 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF1",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF1 = false;
 											}
 										}
 #if DEBUG
@@ -638,27 +527,11 @@ namespace Tortoise912
 											number = line.Substring(15, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF2",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF2 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF2",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF2 = false;
 											}
 										}
 #if DEBUG
@@ -672,27 +545,11 @@ namespace Tortoise912
 											number = line.Substring(15, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF3",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF3 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF3",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF3 = false;
 											}
 										}
 #if DEBUG
@@ -706,27 +563,11 @@ namespace Tortoise912
 											number = line.Substring(15, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF4",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF4 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF4",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF4 = false;
 											}
 										}
 #if DEBUG
@@ -740,27 +581,65 @@ namespace Tortoise912
 											number = line.Substring(15, 1);
 											if (number == "1")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF5",
-													  "True");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF5 = true;
 											}
-											else
+											else if (number == "0")
 											{
-												try
-												{
-													Application.UserAppDataRegistry.SetValue("ENABLE_XF5",
-													  "False");
-												}
-												catch (Exception ex)
-												{
-													MessageBox.Show(ex.Message);
-												}
+												CONFstor.ENABLE_XF5 = false;
+											}
+										}
+#if DEBUG
+										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+#endif
+									}
+									if (line.Contains("SET ENABLE_XF6") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(15, 1);
+											if (number == "1")
+											{
+												CONFstor.ENABLE_XF6 = true;
+											}
+											else if (number == "0")
+											{
+												CONFstor.ENABLE_XF6 = false;
+											}
+										}
+#if DEBUG
+										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+#endif
+									}
+									if (line.Contains("SET ENABLE_XF7") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(15, 1);
+											if (number == "1")
+											{
+												CONFstor.ENABLE_XF7 = true;
+											}
+											else if (number == "0")
+											{
+												CONFstor.ENABLE_XF7 = false;
+											}
+										}
+#if DEBUG
+										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+#endif
+									}
+									if (line.Contains("SET ENABLE_XF8") == true)
+									{
+										if (line.Length > 0)
+										{
+											number = line.Substring(15, 1);
+											if (number == "1")
+											{
+												CONFstor.ENABLE_XF8 = true;
+											}
+											else if (number == "0")
+											{
+												CONFstor.ENABLE_XF8 = false;
 											}
 										}
 #if DEBUG
@@ -773,15 +652,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF1_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF1_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -793,15 +664,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF2_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF2_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -813,15 +676,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF3_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF3_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -833,15 +688,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF4_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF4_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -853,15 +700,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF5_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF5_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -873,15 +712,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF6_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF6_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -893,15 +724,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF7_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF7_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
@@ -913,15 +736,7 @@ namespace Tortoise912
 										{
 											number = line.Substring(12, line.Length - 12);
 											number = Regex.Replace(number, "[\"]", string.Empty);
-											try
-											{
-												Application.UserAppDataRegistry.SetValue("XF8_TXT",
-												  number);
-											}
-											catch (Exception ex)
-											{
-												MessageBox.Show(ex.Message);
-											}
+											CONFstor.XF8_TXT = number;
 										}
 #if DEBUG
 										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);

@@ -23,7 +23,7 @@ namespace Tortoise912
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Application.UserAppDataRegistry.SetValue("CUSR", usernameBOX.Text);
+			CONFstor.LOGUSR = usernameBOX.Text;
 
 			//logic to verify sip login with the sip server
 			try
@@ -63,7 +63,7 @@ namespace Tortoise912
 					varstore.tauth = true;
 
 #else
-					if (settings.Default.Dbug == true)
+					if (Settings.Default.Dbug == true)
 					{
 						MessageBox.Show("No Server Has Been Setup. Granting Debug Login ");
 						varstore.tauth = true;

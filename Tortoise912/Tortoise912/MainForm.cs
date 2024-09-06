@@ -25,9 +25,9 @@ namespace Tortoise912
 		public MainForm()
 		{
 			InitializeComponent();
-			if (Application.UserAppDataRegistry.GetValue("CUSR") != null)
+			if (CONFstor.LOGUSR != null)
 			{
-				usersnamelab.Text = Application.UserAppDataRegistry.GetValue("CUSR").ToString();
+				usersnamelab.Text = CONFstor.LOGUSR;
 			}
 			RefreshButtons();
 
@@ -94,24 +94,31 @@ namespace Tortoise912
 
 		private void RefreshButtons()
 		{
+			//Logout Button
+			if (CONFstor.PROVIDE_LOGOUT == true)
+			{
+				logoutbutton.Visible = true;
+			}
+			else
+			{
+				logoutbutton.Visible = false;
+			}
+
 			//L1
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L1") != null)
+				if (CONFstor.ENABLE_L1 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L1").ToString() == "False")
-					{
-						Line1BUT.Visible = false;
-					}
-					else
-					{
-						Line1BUT.Visible = true;
-					}
+					Line1BUT.Visible = false;
+				}
+				else
+				{
+					Line1BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("LINE_1_TXT") != null)
+				if (CONFstor.LINE_1_TXT != null)
 				{
-					Line1BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_1_TXT").ToString();
+					Line1BUT.Text = CONFstor.LINE_1_TXT.ToString();
 				}
 			}
 			catch (Exception ex)
@@ -122,20 +129,17 @@ namespace Tortoise912
 			//L2
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L2") != null)
+				if (CONFstor.ENABLE_L2 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L2").ToString() == "False")
-					{
-						Line2BUT.Visible = false;
-					}
-					else
-					{
-						Line2BUT.Visible = true;
-					}
+					Line2BUT.Visible = false;
 				}
-				if (Application.UserAppDataRegistry.GetValue("LINE_2_TXT") != null)
+				else
 				{
-					Line2BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_2_TXT").ToString();
+					Line2BUT.Visible = true;
+				}
+				if (CONFstor.LINE_2_TXT != null)
+				{
+					Line2BUT.Text = CONFstor.LINE_2_TXT;
 				}
 			}
 			catch (Exception ex)
@@ -146,21 +150,18 @@ namespace Tortoise912
 			//L3
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L3") != null)
+				if (CONFstor.ENABLE_L3 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L3").ToString() == "False")
-					{
-						Line3BUT.Visible = false;
-					}
-					else
-					{
-						Line3BUT.Visible = true;
-					}
+					Line3BUT.Visible = false;
+				}
+				else
+				{
+					Line3BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("LINE_3_TXT") != null)
+				if (CONFstor.LINE_3_TXT != null)
 				{
-					Line3BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_3_TXT").ToString();
+					Line3BUT.Text = CONFstor.LINE_3_TXT;
 				}
 			}
 			catch (Exception ex)
@@ -171,21 +172,18 @@ namespace Tortoise912
 			//L4
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L4") != null)
+				if (CONFstor.ENABLE_L4 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L4").ToString() == "False")
-					{
-						Line4BUT.Visible = false;
-					}
-					else
-					{
-						Line4BUT.Visible = true;
-					}
+					Line4BUT.Visible = false;
+				}
+				else
+				{
+					Line4BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("LINE_4_TXT") != null)
+				if (CONFstor.LINE_4_TXT != null)
 				{
-					Line4BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_4_TXT").ToString();
+					Line4BUT.Text = CONFstor.LINE_4_TXT;
 				}
 			}
 			catch (Exception ex)
@@ -196,21 +194,18 @@ namespace Tortoise912
 			//L5
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L5") != null)
+				if (CONFstor.ENABLE_L5 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L5").ToString() == "False")
-					{
-						Line5BUT.Visible = false;
-					}
-					else
-					{
-						Line5BUT.Visible = true;
-					}
+					Line5BUT.Visible = false;
+				}
+				else
+				{
+					Line5BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("LINE_5_TXT") != null)
+				if (CONFstor.LINE_5_TXT != null)
 				{
-					Line5BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_5_TXT").ToString();
+					Line5BUT.Text = CONFstor.LINE_5_TXT;
 				}
 			}
 			catch (Exception ex)
@@ -221,21 +216,18 @@ namespace Tortoise912
 			//L6
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_L6") != null)
+				if (CONFstor.ENABLE_L6 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_L6").ToString() == "False")
-					{
-						Line6BUT.Visible = false;
-					}
-					else
-					{
-						Line6BUT.Visible = true;
-					}
+					Line6BUT.Visible = false;
+				}
+				else
+				{
+					Line6BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("LINE_6_TXT") != null)
+				if (CONFstor.LINE_6_TXT != null)
 				{
-					Line6BUT.Text = Application.UserAppDataRegistry.GetValue("LINE_6_TXT").ToString();
+					Line6BUT.Text = CONFstor.LINE_6_TXT;
 				}
 			}
 			catch (Exception ex)
@@ -246,9 +238,9 @@ namespace Tortoise912
 			//XFER1
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF1") != null)
+				if (CONFstor.ENABLE_XF1 != null)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF1").ToString() == "False")
+					if (CONFstor.ENABLE_XF1 == false)
 					{
 						xfer1BUT.Visible = false;
 					}
@@ -258,10 +250,11 @@ namespace Tortoise912
 					}
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF1_TXT") != null)
+				if (CONFstor.XF1_TXT != null)
 				{
-					xfer1BUT.Text = Application.UserAppDataRegistry.GetValue("XF1_TXT").ToString();
+					xfer1BUT.Text = CONFstor.XF1_TXT;
 				}
+
 				if (Application.UserAppDataRegistry.GetValue("XF1_CLR") != null)
 				{
 					string clr = Application.UserAppDataRegistry.GetValue("XF1_CLR").ToString();
@@ -296,9 +289,9 @@ namespace Tortoise912
 			//XFER2
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF2") != null)
+				if (CONFstor.ENABLE_XF2 != null)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF2").ToString() == "False")
+					if (CONFstor.ENABLE_XF2 == false)
 					{
 						xfer2BUT.Visible = false;
 					}
@@ -308,9 +301,9 @@ namespace Tortoise912
 					}
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF2_TXT") != null)
+				if (CONFstor.XF2_TXT != null)
 				{
-					xfer2BUT.Text = Application.UserAppDataRegistry.GetValue("XF2_TXT").ToString();
+					xfer2BUT.Text = CONFstor.XF2_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF2_CLR") != null)
 				{
@@ -346,21 +339,18 @@ namespace Tortoise912
 			//XFER3
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF3") != null)
+				if (CONFstor.ENABLE_XF3 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF3").ToString() == "False")
-					{
-						xfer3BUT.Visible = false;
-					}
-					else
-					{
-						xfer3BUT.Visible = true;
-					}
+					xfer3BUT.Visible = false;
+				}
+				else
+				{
+					xfer3BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF3_TXT") != null)
+				if (CONFstor.XF3_TXT != null)
 				{
-					xfer3BUT.Text = Application.UserAppDataRegistry.GetValue("XF3_TXT").ToString();
+					xfer3BUT.Text = CONFstor.XF3_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF3_CLR") != null)
 				{
@@ -396,21 +386,18 @@ namespace Tortoise912
 			//XFER4
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF4") != null)
+				if (CONFstor.ENABLE_XF4 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF4").ToString() == "False")
-					{
-						xfer4BUT.Visible = false;
-					}
-					else
-					{
-						xfer4BUT.Visible = true;
-					}
+					xfer4BUT.Visible = false;
+				}
+				else
+				{
+					xfer4BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF4_TXT") != null)
+				if (CONFstor.XF4_TXT != null)
 				{
-					xfer4BUT.Text = Application.UserAppDataRegistry.GetValue("XF4_TXT").ToString();
+					xfer4BUT.Text = CONFstor.XF4_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF4_CLR") != null)
 				{
@@ -446,21 +433,18 @@ namespace Tortoise912
 			//XFER5
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF5") != null)
+				if (CONFstor.ENABLE_XF5 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF5").ToString() == "False")
-					{
-						xfer5BUT.Visible = false;
-					}
-					else
-					{
-						xfer5BUT.Visible = true;
-					}
+					xfer5BUT.Visible = false;
+				}
+				else
+				{
+					xfer5BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF5_TXT") != null)
+				if (CONFstor.XF5_TXT != null)
 				{
-					xfer5BUT.Text = Application.UserAppDataRegistry.GetValue("XF5_TXT").ToString();
+					xfer5BUT.Text = CONFstor.XF5_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF5_CLR") != null)
 				{
@@ -496,21 +480,18 @@ namespace Tortoise912
 			//XFER6
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF6") != null)
+				if (CONFstor.ENABLE_XF6 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF6").ToString() == "False")
-					{
-						xfer6BUT.Visible = false;
-					}
-					else
-					{
-						xfer6BUT.Visible = true;
-					}
+					xfer6BUT.Visible = false;
+				}
+				else
+				{
+					xfer6BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF6_TXT") != null)
+				if (CONFstor.XF6_TXT != null)
 				{
-					xfer6BUT.Text = Application.UserAppDataRegistry.GetValue("XF6_TXT").ToString();
+					xfer6BUT.Text = CONFstor.XF6_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF6_CLR") != null)
 				{
@@ -546,21 +527,18 @@ namespace Tortoise912
 			//XFER7
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF7") != null)
+				if (CONFstor.ENABLE_XF7 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF7").ToString() == "False")
-					{
-						xfer7BUT.Visible = false;
-					}
-					else
-					{
-						xfer7BUT.Visible = true;
-					}
+					xfer7BUT.Visible = false;
+				}
+				else
+				{
+					xfer7BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF7_TXT") != null)
+				if (CONFstor.XF7_TXT != null)
 				{
-					xfer7BUT.Text = Application.UserAppDataRegistry.GetValue("XF7_TXT").ToString();
+					xfer7BUT.Text = CONFstor.XF7_TXT;
 				}
 				if (Application.UserAppDataRegistry.GetValue("XF7_CLR") != null)
 				{
@@ -596,21 +574,18 @@ namespace Tortoise912
 			//XFER8
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("ENABLE_XF8") != null)
+				if (CONFstor.ENABLE_XF8 == false)
 				{
-					if (Application.UserAppDataRegistry.GetValue("ENABLE_XF8").ToString() == "False")
-					{
-						xfer8BUT.Visible = false;
-					}
-					else
-					{
-						xfer8BUT.Visible = true;
-					}
+					xfer8BUT.Visible = false;
+				}
+				else
+				{
+					xfer8BUT.Visible = true;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("XF8_TXT") != null)
+				if (CONFstor.XF8_TXT != null)
 				{
-					xfer8BUT.Text = Application.UserAppDataRegistry.GetValue("XF8_TXT").ToString();
+					xfer8BUT.Text = CONFstor.XF8_TXT;
 				}
 
 				if (Application.UserAppDataRegistry.GetValue("XF8_CLR") != null)
@@ -647,9 +622,9 @@ namespace Tortoise912
 			//Status box
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("CONFSTATUS") != null)
+				if (CONFstor.CONFSTATUS != null)
 				{
-					statusTXT.Text = Application.UserAppDataRegistry.GetValue("CONFSTATUS").ToString();
+					statusTXT.Text = CONFstor.CONFSTATUS;
 				}
 			}
 			catch (Exception ex)
@@ -658,12 +633,22 @@ namespace Tortoise912
 			}
 		}
 
+		/// <summary>
+		/// Clock Update timer, Ever 1 S
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void timetimer_Tick(object sender, EventArgs e)
 		{
 			timeLAB.Text = DateTime.Now.ToString("HH:MM:ss");
 			dateLAB.Text = DateTime.Now.ToString("MM/dd/yyyy");
 		}
 
+		/// <summary>
+		/// Config Refresh Timer Tick
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void conftimer_Tick(object sender, EventArgs e)
 		{
 			ConfigParse.parse();
@@ -673,6 +658,11 @@ namespace Tortoise912
 			});
 		}
 
+		/// <summary>
+		/// Quit button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void quitbutton_Click(object sender, EventArgs e)
 		{
 			if (CLEANINGSCREEN == false)
@@ -681,6 +671,11 @@ namespace Tortoise912
 			}
 		}
 
+		/// <summary>
+		/// Notes Button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void button19_Click(object sender, EventArgs e)
 		{
 			if (CLEANINGSCREEN == false) { }
@@ -688,6 +683,11 @@ namespace Tortoise912
 			//Open Notes Panel
 		}
 
+		/// <summary>
+		/// Config/Settings button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void configBUT_Click(object sender, EventArgs e)
 		{
 			if (CLEANINGSCREEN == false)
@@ -697,6 +697,11 @@ namespace Tortoise912
 			}
 		}
 
+		/// <summary>
+		/// About Button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void aboutBUT_Click(object sender, EventArgs e)
 		{
 			if (CLEANINGSCREEN == false)
@@ -706,19 +711,27 @@ namespace Tortoise912
 			}
 		}
 
+		/// <summary>
+		/// Logout Button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void button10_Click(object sender, EventArgs e)
 		{
 			if (CLEANINGSCREEN == false)
 			{
-				var confirmResult = MessageBox.Show("Are you sure you want to logout", "Confirm Logout!!", MessageBoxButtons.YesNo);
-				if (confirmResult == DialogResult.Yes)
+				if (CONFstor.PROVIDE_LOGOUT == true)
 				{
-					OperatorLogin OL = new OperatorLogin();
-					OL.Show();
-					this.Hide();
-				}
-				else
-				{
+					var confirmResult = MessageBox.Show("Are you sure you want to logout", "Confirm Logout!!", MessageBoxButtons.YesNo);
+					if (confirmResult == DialogResult.Yes)
+					{
+						OperatorLogin OL = new OperatorLogin();
+						OL.Show();
+						this.Hide();
+					}
+					else
+					{
+					}
 				}
 			}
 		}

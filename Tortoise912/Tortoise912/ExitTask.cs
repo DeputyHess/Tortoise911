@@ -21,7 +21,7 @@ namespace Tortoise912
 
 				Siphandle.sipTransport.Shutdown();
 			}
-			catch (Exception) { }
+			catch (NullReferenceException ex) { }
 
 			System.Windows.Forms.Application.Exit();
 		}

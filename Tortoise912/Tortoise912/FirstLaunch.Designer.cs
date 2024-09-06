@@ -119,6 +119,7 @@
 			StartPosition = FormStartPosition.CenterParent;
 			Text = "FirstLaunch";
 			TopMost = true;
+			FormClosing += FirstLaunch_FormClosing;
 			ResumeLayout(false);
 			PerformLayout();
 		}

@@ -72,6 +72,8 @@ namespace Tortoise912
 		/// </summary>
 		public System.Windows.Forms.Timer cleantimer = new System.Windows.Forms.Timer();
 
+		public System.Windows.Forms.Timer ringtimeout = new System.Windows.Forms.Timer();
+
 		/// <summary>
 		/// The Main Window
 		/// </summary>
@@ -123,6 +125,10 @@ namespace Tortoise912
 			conftimer.Tick += new EventHandler(conftimer_Tick);
 			conftimer.Start();
 			conftimer.Enabled = true;
+
+			ringtimeout.Interval = (70000);
+			ringtimeout.Tick += new EventHandler(ringtimeout_Tick);
+			ringtimeout.Enabled = true;
 			if (System.Windows.Forms.Application.UserAppDataRegistry.GetValue("CONFSTATUS") != null)
 			{
 				if (System.Windows.Forms.Application.UserAppDataRegistry.GetValue("CONFSTATUS").ToString() == "Unprovisioned")
@@ -754,6 +760,26 @@ namespace Tortoise912
 			_sipRegistrationClient.Start();
 		}
 
+		private async void ringtimeout_Tick(object sender, EventArgs e) 
+		{
+			string MBT = "";
+			UpdateTextBox(mobilityTXT, MBT);
+			UpdateTextBox(mobilityTXT, Color.DarkGray);
+			UpdateTextBox(zTXT, MBT);
+			UpdateTextBox(yTXT, MBT);
+			UpdateTextBox(XText, MBT);
+			UpdateTextBox(callerbox, MBT);
+			UpdateTextBox(callerbox, MBT);
+			UpdateTextBox(statusTXT, MBT);
+			UpdateTextBox(methodTXT, MBT);
+			UpdateTextBox(addrbox, MBT);
+			UpdateTextBox(phNUMTXT, MBT);
+			UpdateTextBox(uriTXT, MBT);
+			UpdateTextBox(provideridTXT, MBT);
+			UpdateTextBox(arrCdeTXT, MBT);
+			UpdateTextBox(extNUMTXT, MBT);
+			ResetFlashTrigs();
+		}
 		/// <summary>
 		/// Clock Update timer, Ever 1 S
 		/// </summary>
@@ -1008,6 +1034,12 @@ namespace Tortoise912
 			L4FT = false;
 			L5FT = false;
 			L6FT = false;
+			Line1BUT.BackColor = Color.DarkGray;
+			Line2BUT.BackColor = Color.DarkGray;
+			Line3BUT.BackColor = Color.DarkGray;
+			Line4BUT.BackColor = Color.DarkGray;
+			Line5BUT.BackColor = Color.DarkGray;
+			Line6BUT.BackColor = Color.DarkGray;
 		}
 		/// <summary>
 		/// Update Text Box Text
@@ -1102,6 +1134,7 @@ namespace Tortoise912
 					MBC = Color.Red;
 					break;
 			}
+			ringtimeout.Start();
 			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(mobilityTXT, MBT);

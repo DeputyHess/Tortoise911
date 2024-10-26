@@ -83,6 +83,9 @@ namespace Tortoise912
 			regUserAgent.RegistrationTemporaryFailure += (uri, resp, msg) => stat = 2;
 			regUserAgent.RegistrationRemoved += (uri, resp) => stat = 9;
 			regUserAgent.RegistrationSuccessful += (uri, resp) => stat = 0;
+
+
+			Thread.Sleep(4000);
 			regUserAgent.Stop();
 
 			return stat;

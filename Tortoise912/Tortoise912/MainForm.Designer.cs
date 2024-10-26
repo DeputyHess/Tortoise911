@@ -35,7 +35,7 @@
 			yLAB = new Label();
 			yTXT = new TextBox();
 			label3 = new Label();
-			textBox5 = new TextBox();
+			XText = new TextBox();
 			infolab = new Label();
 			infoTXT = new TextBox();
 			exactLAB = new Label();
@@ -60,10 +60,10 @@
 			textBox2 = new TextBox();
 			classLAB = new Label();
 			classTXT = new TextBox();
-			richTextBox1 = new RichTextBox();
+			addrbox = new RichTextBox();
 			addrLabel = new Label();
 			cidLabel = new Label();
-			textBox1 = new TextBox();
+			callerbox = new TextBox();
 			button19 = new Button();
 			button17 = new Button();
 			button16 = new Button();
@@ -76,7 +76,7 @@
 			arrCdeTXT = new TextBox();
 			button7 = new Button();
 			printBUT = new Button();
-			button5 = new Button();
+			byebutton = new Button();
 			button4 = new Button();
 			button3 = new Button();
 			screenclean2BUT = new Button();
@@ -152,7 +152,7 @@
 			CallInfoPanel.Controls.Add(yLAB);
 			CallInfoPanel.Controls.Add(yTXT);
 			CallInfoPanel.Controls.Add(label3);
-			CallInfoPanel.Controls.Add(textBox5);
+			CallInfoPanel.Controls.Add(XText);
 			CallInfoPanel.Controls.Add(infolab);
 			CallInfoPanel.Controls.Add(infoTXT);
 			CallInfoPanel.Controls.Add(exactLAB);
@@ -177,10 +177,10 @@
 			CallInfoPanel.Controls.Add(textBox2);
 			CallInfoPanel.Controls.Add(classLAB);
 			CallInfoPanel.Controls.Add(classTXT);
-			CallInfoPanel.Controls.Add(richTextBox1);
+			CallInfoPanel.Controls.Add(addrbox);
 			CallInfoPanel.Controls.Add(addrLabel);
 			CallInfoPanel.Controls.Add(cidLabel);
-			CallInfoPanel.Controls.Add(textBox1);
+			CallInfoPanel.Controls.Add(callerbox);
 			CallInfoPanel.Controls.Add(button19);
 			CallInfoPanel.Controls.Add(button17);
 			CallInfoPanel.Controls.Add(button16);
@@ -193,7 +193,7 @@
 			CallInfoPanel.Controls.Add(arrCdeTXT);
 			CallInfoPanel.Controls.Add(button7);
 			CallInfoPanel.Controls.Add(printBUT);
-			CallInfoPanel.Controls.Add(button5);
+			CallInfoPanel.Controls.Add(byebutton);
 			CallInfoPanel.Controls.Add(button4);
 			CallInfoPanel.Controls.Add(button3);
 			CallInfoPanel.Controls.Add(screenclean2BUT);
@@ -258,16 +258,16 @@
 			label3.TabIndex = 53;
 			label3.Text = "X (Long)";
 			// 
-			// textBox5
+			// XText
 			// 
-			textBox5.BackColor = Color.DarkGray;
-			textBox5.BorderStyle = BorderStyle.FixedSingle;
-			textBox5.Location = new Point(67, 229);
-			textBox5.Name = "textBox5";
-			textBox5.ReadOnly = true;
-			textBox5.Size = new Size(111, 23);
-			textBox5.TabIndex = 52;
-			textBox5.TabStop = false;
+			XText.BackColor = Color.DarkGray;
+			XText.BorderStyle = BorderStyle.FixedSingle;
+			XText.Location = new Point(67, 229);
+			XText.Name = "XText";
+			XText.ReadOnly = true;
+			XText.Size = new Size(111, 23);
+			XText.TabIndex = 52;
+			XText.TabStop = false;
 			// 
 			// infolab
 			// 
@@ -521,17 +521,17 @@
 			classTXT.TabIndex = 28;
 			classTXT.TabStop = false;
 			// 
-			// richTextBox1
+			// addrbox
 			// 
-			richTextBox1.BackColor = Color.DarkGray;
-			richTextBox1.BorderStyle = BorderStyle.FixedSingle;
-			richTextBox1.Location = new Point(67, 109);
-			richTextBox1.Name = "richTextBox1";
-			richTextBox1.ReadOnly = true;
-			richTextBox1.Size = new Size(194, 52);
-			richTextBox1.TabIndex = 27;
-			richTextBox1.TabStop = false;
-			richTextBox1.Text = "";
+			addrbox.BackColor = Color.DarkGray;
+			addrbox.BorderStyle = BorderStyle.FixedSingle;
+			addrbox.Location = new Point(67, 109);
+			addrbox.Name = "addrbox";
+			addrbox.ReadOnly = true;
+			addrbox.Size = new Size(194, 52);
+			addrbox.TabIndex = 27;
+			addrbox.TabStop = false;
+			addrbox.Text = "";
 			// 
 			// addrLabel
 			// 
@@ -553,16 +553,16 @@
 			cidLabel.TabIndex = 24;
 			cidLabel.Text = "Caller";
 			// 
-			// textBox1
+			// callerbox
 			// 
-			textBox1.BackColor = Color.DarkGray;
-			textBox1.BorderStyle = BorderStyle.FixedSingle;
-			textBox1.Location = new Point(67, 80);
-			textBox1.Name = "textBox1";
-			textBox1.ReadOnly = true;
-			textBox1.Size = new Size(194, 23);
-			textBox1.TabIndex = 23;
-			textBox1.TabStop = false;
+			callerbox.BackColor = Color.DarkGray;
+			callerbox.BorderStyle = BorderStyle.FixedSingle;
+			callerbox.Location = new Point(67, 80);
+			callerbox.Name = "callerbox";
+			callerbox.ReadOnly = true;
+			callerbox.Size = new Size(194, 23);
+			callerbox.TabIndex = 23;
+			callerbox.TabStop = false;
 			// 
 			// button19
 			// 
@@ -652,6 +652,7 @@
 			phNUMTXT.Size = new Size(97, 23);
 			phNUMTXT.TabIndex = 13;
 			phNUMTXT.TabStop = false;
+			phNUMTXT.Text = "  ";
 			// 
 			// arrCdeTXT
 			// 
@@ -683,15 +684,16 @@
 			printBUT.TabIndex = 5;
 			printBUT.UseVisualStyleBackColor = true;
 			// 
-			// button5
+			// byebutton
 			// 
-			button5.BackgroundImage = Properties.Resources.molumen_red_square_error_warning_icon;
-			button5.BackgroundImageLayout = ImageLayout.Zoom;
-			button5.Location = new Point(364, 373);
-			button5.Name = "button5";
-			button5.Size = new Size(78, 30);
-			button5.TabIndex = 4;
-			button5.UseVisualStyleBackColor = true;
+			byebutton.BackgroundImage = Properties.Resources.molumen_red_square_error_warning_icon;
+			byebutton.BackgroundImageLayout = ImageLayout.Zoom;
+			byebutton.Location = new Point(364, 373);
+			byebutton.Name = "byebutton";
+			byebutton.Size = new Size(78, 30);
+			byebutton.TabIndex = 4;
+			byebutton.UseVisualStyleBackColor = true;
+			byebutton.Click += byebutton_Click;
 			// 
 			// button4
 			// 
@@ -833,6 +835,7 @@
 			Line1BUT.TabIndex = 2;
 			Line1BUT.Text = "LINE 1";
 			Line1BUT.UseVisualStyleBackColor = true;
+			Line1BUT.Click += Line1BUT_Click;
 			// 
 			// Line2BUT
 			// 
@@ -843,6 +846,7 @@
 			Line2BUT.TabIndex = 3;
 			Line2BUT.Text = "LINE 2";
 			Line2BUT.UseVisualStyleBackColor = true;
+			Line2BUT.Click += Line2BUT_Click;
 			// 
 			// Line4BUT
 			// 
@@ -853,6 +857,7 @@
 			Line4BUT.TabIndex = 5;
 			Line4BUT.Text = "LINE 4";
 			Line4BUT.UseVisualStyleBackColor = true;
+			Line4BUT.Click += Line4BUT_Click;
 			// 
 			// Line3BUT
 			// 
@@ -863,6 +868,7 @@
 			Line3BUT.TabIndex = 4;
 			Line3BUT.Text = "LINE 3";
 			Line3BUT.UseVisualStyleBackColor = true;
+			Line3BUT.Click += Line3BUT_Click;
 			// 
 			// Line6BUT
 			// 
@@ -873,6 +879,7 @@
 			Line6BUT.TabIndex = 7;
 			Line6BUT.Text = "LINE 6";
 			Line6BUT.UseVisualStyleBackColor = true;
+			Line6BUT.Click += Line6BUT_Click;
 			// 
 			// Line5BUT
 			// 
@@ -883,6 +890,7 @@
 			Line5BUT.TabIndex = 6;
 			Line5BUT.Text = "LINE 5";
 			Line5BUT.UseVisualStyleBackColor = true;
+			Line5BUT.Click += Line5BUT_Click;
 			// 
 			// panel2
 			// 
@@ -1127,7 +1135,7 @@
 			// 
 			statusTXT.BackColor = Color.Silver;
 			statusTXT.BorderStyle = BorderStyle.FixedSingle;
-			statusTXT.Font = new Font("Roboto", 11F);
+			statusTXT.Font = new Font("Microsoft Sans Serif", 11F);
 			statusTXT.ForeColor = Color.Black;
 			statusTXT.Location = new Point(282, 488);
 			statusTXT.Name = "statusTXT";
@@ -1183,6 +1191,7 @@
 			holdBUT.TabIndex = 64;
 			holdBUT.Text = "HOLD";
 			holdBUT.UseVisualStyleBackColor = false;
+			holdBUT.Click += holdBUT_Click;
 			// 
 			// confXBut
 			// 
@@ -1360,6 +1369,8 @@
 			Name = "MainForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Tortoise 912";
+			FormClosing += MainForm_FormClosing;
+			Load += MainForm_Load;
 			CallInfoPanel.ResumeLayout(false);
 			CallInfoPanel.PerformLayout();
 			panel1.ResumeLayout(false);
@@ -1375,7 +1386,7 @@
 
 		private Panel CallInfoPanel;
 		private Button printBUT;
-		private Button button5;
+		private Button byebutton;
 		private Button button4;
 		private Button button3;
 		private Button screenclean2BUT;
@@ -1400,8 +1411,8 @@
 		private Button button13;
 		private Button button19;
 		private Label cidLabel;
-		private TextBox textBox1;
-		private RichTextBox richTextBox1;
+		private TextBox callerbox;
+		private RichTextBox addrbox;
 		private Label addrLabel;
 		private Button Line1BUT;
 		private Button Line2BUT;
@@ -1438,7 +1449,7 @@
 		private Label infolab;
 		private TextBox infoTXT;
 		private Label label3;
-		private TextBox textBox5;
+		private TextBox XText;
 		private Label zLAB;
 		private TextBox zTXT;
 		private Label yLAB;

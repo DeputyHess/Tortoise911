@@ -5,6 +5,7 @@
 
 using Microsoft.Win32;
 using Org.BouncyCastle.Ocsp;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;

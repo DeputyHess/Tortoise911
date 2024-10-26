@@ -17,6 +17,7 @@
     <Company>NyxTelecom</Company>
     <Authors>Nyx</Authors>
     <Copyright>Nyx Gallini 2025</Copyright>
+    <UseWPF>True</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

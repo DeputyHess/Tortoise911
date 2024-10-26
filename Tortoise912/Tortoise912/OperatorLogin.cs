@@ -67,6 +67,8 @@ namespace Tortoise912
 
 			if (grant == true)
 			{
+				CONFstor.SUS = usernameBOX.Text;
+				CONFstor.SPW = passwordBOX.Text;
 				this.Hide();
 				MainForm MF = new MainForm();
 				MF.Show();

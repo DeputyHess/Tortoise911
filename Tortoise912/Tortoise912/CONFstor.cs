@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,9 @@ namespace Tortoise912
 {
 	internal class CONFstor
 	{
+		internal static int LINE_LIM { get; set; }
+		internal static string STUNServerHostname { get; set; }
+		internal static IPAddress PublicIPAddress { get; set; }
 		internal static string GMTOFFSET { get; set; }
 
 		internal static string DAYLIGHT_SAVING_SETTNG_MODE { get; set; }
@@ -154,5 +158,9 @@ namespace Tortoise912
 		internal static string CONFSTATUS { get; set; }
 
 		internal static string LOGUSR { get; set; }
+
+		internal static string SPW { get; set; }
+
+		internal static string SUS {  get; set; }
 	}
 }

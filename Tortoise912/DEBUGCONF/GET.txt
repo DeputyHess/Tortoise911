@@ -1,1 +1,1 @@
-GET 46xxsettings-912.txt
+GET 46xxsettings-aura-vantage.txt

@@ -1010,6 +1010,16 @@ namespace Tortoise912
 			{
 				//MAKE AN ERROR WINDOW OR SOMETHING
 			}
+
+			//Set Max Line Cout
+			int maxln = 0;
+			if (CONFstor.ENABLE_L1 == true) { maxln++; }
+			if (CONFstor.ENABLE_L2 == true) { maxln++; }
+			if (CONFstor.ENABLE_L3 == true) { maxln++; }
+			if (CONFstor.ENABLE_L4 == true) { maxln++; }
+			if (CONFstor.ENABLE_L5 == true) { maxln++; }
+			if (CONFstor.ENABLE_L6 == true) { maxln++; }
+			CONFstor.LINE_LIM = maxln;
 		}
 	}
 }

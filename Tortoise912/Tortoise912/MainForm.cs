@@ -806,6 +806,7 @@ namespace Tortoise912
 		{
 			if (CLEANINGSCREEN == false)
 			{
+				System.Windows.MessageBox.Show("Exiting");
 				ExitTask.Exit();
 			}
 		}
@@ -964,40 +965,98 @@ namespace Tortoise912
 		}
 
 		/// <summary>
+		/// Update Text Box Text
+		/// </summary>
+		/// <param name="box"></param>
+		/// <param name="text"></param>
+		public void UpdateTextBox(TextBox box,string text)
+		{
+			Invoke((MethodInvoker)delegate {
+				box.Text = text;
+			});
+		}
+
+		/// <summary>
+		/// UpDate Rich Text Box
+		/// </summary>
+		/// <param name="box"></param>
+		/// <param name="text"></param>
+		public void UpdateTextBox(RichTextBox box, string text)
+		{
+			Invoke((MethodInvoker)delegate {
+				box.Text = text;
+			});
+		}
+		/// <summary>
+		/// update back color
+		/// </summary>
+		/// <param name="box"></param>
+		/// <param name="Color"></param>
+		public void UpdateTextBox(TextBox box, Color Color)
+		{
+			Invoke((MethodInvoker)delegate {
+				box.BackColor = Color;
+			});
+		}
+
+		/// <summary>
 		/// Checks if there is a client that can accept the call and if so sets up the UI
 		/// to present the handling options to the user.
 		/// </summary>
 		private bool SIPCallIncoming(SIPRequest sipRequest)
 		{
-			callerbox.Text = sipRequest.Header.From.FriendlyDescription();
+			Invoke((MethodInvoker)delegate
+			{
+				UpdateTextBox(callerbox, sipRequest.Header.From.FriendlyDescription());
+			});
+
 			string tmptpn = sipRequest.Header.CallId;
 			tmptpn = tmptpn.Substring(3, tmptpn.Length - 3);
 			string arcd = tmptpn.Substring(0, 3);
-			arrCdeTXT.Text = arcd;
-			phNUMTXT.Text = tmptpn;
+
+			Invoke((MethodInvoker)delegate
+			{
+				UpdateTextBox(arrCdeTXT, arcd);
+			});
+			Invoke((MethodInvoker)delegate
+			{
+				UpdateTextBox(phNUMTXT, tmptpn);
+			});
+
 
 			Random rnd = new Random();
 			int rn = rnd.Next(1, 3);
 			//Set mobility text
+			string MBT = "Unknown";
+			Color MBC = Color.Red;
 			switch (rn)
 			{
 				case 1:
-					mobilityTXT.Text = "Cellular";
-					mobilityTXT.BackColor = Color.LightCyan;
+					MBT = "Cellular";
+					MBC = Color.LightCyan;
 					break;
 				case 2:
-					mobilityTXT.Text = "Landline";
-					mobilityTXT.BackColor = Color.OrangeRed;
+					MBT = "Landline";
+					MBC = Color.OrangeRed;
 					break;
 				case 3:
-					mobilityTXT.Text = "Satilite";
-					mobilityTXT.BackColor = Color.RebeccaPurple;
+					MBT = "Satilite";
+					MBC = Color.RebeccaPurple;
 					break;
 				default:
-					mobilityTXT.Text = "Unknown";
-					mobilityTXT.BackColor = Color.Red;
+					MBT = "Unknown";
+					MBC = Color.Red;
 					break;
 			}
+			Invoke((MethodInvoker)delegate
+			{
+				UpdateTextBox(mobilityTXT, MBT);
+			});
+			Invoke((MethodInvoker)delegate
+			{
+				UpdateTextBox(mobilityTXT, MBC);
+			});
+
 
 			//TODO: Add Call to Active Call List
 
@@ -1026,59 +1085,63 @@ namespace Tortoise912
 			{
 				L1FT = true;
 			}
-
-			if (!_sipClients[0].IsCallActive)
+			try 
 			{
-				_sipClients[0].Accept(sipRequest);
+				if (!_sipClients[0].IsCallActive)
+				{
+					_sipClients[0].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else if (!_sipClients[1].IsCallActive)
-			{
-				_sipClients[1].Accept(sipRequest);
+					return true;
+				}
+				else if (!_sipClients[1].IsCallActive)
+				{
+					_sipClients[1].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else if (!_sipClients[2].IsCallActive)
-			{
-				_sipClients[2].Accept(sipRequest);
+					return true;
+				}
+				else if (!_sipClients[2].IsCallActive)
+				{
+					_sipClients[2].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else if (!_sipClients[3].IsCallActive)
-			{
-				_sipClients[3].Accept(sipRequest);
+					return true;
+				}
+				else if (!_sipClients[3].IsCallActive)
+				{
+					_sipClients[3].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else if (!_sipClients[4].IsCallActive)
-			{
-				_sipClients[4].Accept(sipRequest);
+					return true;
+				}
+				else if (!_sipClients[4].IsCallActive)
+				{
+					_sipClients[4].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else if (!_sipClients[5].IsCallActive)
-			{
-				_sipClients[5].Accept(sipRequest);
+					return true;
+				}
+				else if (!_sipClients[5].IsCallActive)
+				{
+					_sipClients[5].Accept(sipRequest);
 
-				//Set Call Screen up for Call
+					//Set Call Screen up for Call
 
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			} catch (Exception ex) 
+			{ return false; }
+			
 		}
 
 		/// <summary>
@@ -1087,12 +1150,6 @@ namespace Tortoise912
 		/// </summary>
 		private async void SIPCallAnswered(SIPClient client)
 		{
-
-				if (_sipClients[1].IsCallActive && !_sipClients[1].IsOnHold)
-				{
-					//_sipClients[1].PutOnHold(_onHoldAudioScopeGL);
-					await _sipClients[1].PutOnHold();
-				}
 
 				//Gen Addr, Provider, Etc
 		}
@@ -1103,7 +1160,30 @@ namespace Tortoise912
 		/// <param name="sender"></param>
 		private void HngUpCall(object sender)
 		{
-			var client = (sender == byebutton) ? _sipClients[0] : _sipClients[1];
+			var client = _sipClients[0];
+			switch (actline) 
+			{
+				case 1:
+					client = _sipClients[0];
+					break;
+				case 2:
+					client = _sipClients[1];
+					break;
+				case 3:
+					client = _sipClients[2];
+					break;
+				case 4:
+					client = _sipClients[3];
+					break;
+				case 5:
+					client = _sipClients[4];
+					break;
+				case 6:
+					client = _sipClients[5];
+					break;
+				default:
+					break;
+			}
 			client.Hangup();
 
 			ResetToCallStartState(client);

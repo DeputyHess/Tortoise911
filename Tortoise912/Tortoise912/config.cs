@@ -23,14 +23,16 @@ namespace Tortoise912
 			InitializeComponent();
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("PROV_URL") != null)
+				ConfigFileBullshit CFB = new ConfigFileBullshit();
+				CFB.getconf();
+				if (CFB.Provurl != null)
 				{
-					provTXT.Text = Application.UserAppDataRegistry.GetValue("PROV_URL").ToString();
+					provTXT.Text = CFB.Provurl;
 				}
 
-				if (Application.UserAppDataRegistry.GetValue("PROV_GRP") != null)
+				if (CFB.Provgrp != null)
 				{
-					provgrpTXT.Text = Application.UserAppDataRegistry.GetValue("PROV_GRP").ToString();
+					provgrpTXT.Text = CFB.Provgrp;
 				}
 			}
 			catch (Exception ex)
@@ -43,8 +45,10 @@ namespace Tortoise912
 		{
 			try
 			{
-				Application.UserAppDataRegistry.SetValue("PROV_URL", provTXT.Text);
-				Application.UserAppDataRegistry.SetValue("PROV_GRP", provgrpTXT.Text);
+				ConfigFileBullshit CFB = new ConfigFileBullshit();
+				CFB.Provurl= provTXT.Text;
+				CFB.Provgrp = provgrpTXT.Text;
+				CFB.setconf();
 			}
 			catch (Exception ex)
 			{

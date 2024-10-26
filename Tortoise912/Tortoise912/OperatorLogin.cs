@@ -23,7 +23,7 @@ namespace Tortoise912
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			CONFstor.LOGUSR = usernameBOX.Text;
+			CONFstor.LOGUSR = " " + usernameBOX.Text;
 
 			//logic to verify sip login with the sip server
 			try

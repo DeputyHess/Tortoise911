@@ -18,7 +18,9 @@ namespace Tortoise912
 			ApplicationConfiguration.Initialize();
 			try
 			{
-				if (Application.UserAppDataRegistry.GetValue("PROV_URL") != null || Application.UserAppDataRegistry.GetValue("PROV_GRP") != null)
+				ConfigFileBullshit config = new ConfigFileBullshit();
+				config.GetType();
+				if (config.Provurl != null || config.Provgrp != null)
 				{
 				}
 				else

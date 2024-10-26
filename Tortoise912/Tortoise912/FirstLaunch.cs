@@ -61,8 +61,10 @@ namespace Tortoise912
 
 		private void subBUT_Click(object sender, EventArgs e)
 		{
-			Application.UserAppDataRegistry.SetValue("PROV_GRP", provgrpBOX.Text);
-			Application.UserAppDataRegistry.SetValue("PROV_URL", provurlBOX.Text);
+			ConfigFileBullshit config = new ConfigFileBullshit();
+			config.Provgrp = provgrpBOX.Text;
+			config.Provurl = provurlBOX.Text;
+			config.setconf();
 			DONT = true;
 			this.Close();
 		}

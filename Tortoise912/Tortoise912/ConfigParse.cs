@@ -3,6 +3,7 @@
 *   This program is distributed WITHOUT WARRANTY.
 */
 
+using Microsoft.Win32;
 using Org.BouncyCastle.Ocsp;
 using System.Net;
 using System.Text.RegularExpressions;

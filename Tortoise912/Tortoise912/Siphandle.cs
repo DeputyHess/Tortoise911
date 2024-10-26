@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1.X509;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Reflection.Metadata.Ecma335;
+using static System.Windows.Forms.AxHost;
 
 namespace Tortoise912
 {
@@ -61,12 +62,12 @@ namespace Tortoise912
 			sipTransport.EnableTraceLogs();
 
 			// Create a client user agent to maintain a periodic registration with a SIP server.
-
+			int stat = 69;
 			// Event handlers for the different stages of the registration.
-			regUserAgent.RegistrationFailed += (uri, resp, err) => Log.LogWarning($"{uri}: {err}");
-			regUserAgent.RegistrationTemporaryFailure += (uri, resp, msg) => Log.LogWarning($"{uri}: {msg}");
-			regUserAgent.RegistrationRemoved += (uri, resp) => Log.LogWarning($"{uri} registration failed.");
-			regUserAgent.RegistrationSuccessful += (uri, resp) => Log.LogInformation($"{uri} registration succeeded.");
+			regUserAgent.RegistrationFailed += (uri, resp, err) => stat = 1;
+			regUserAgent.RegistrationTemporaryFailure += (uri, resp, msg) => stat = 2;
+			regUserAgent.RegistrationRemoved += (uri, resp) => stat = 9;
+			regUserAgent.RegistrationSuccessful += (uri, resp) => stat = 0;
 		}
 
 		internal static int SippyPWCheck(SIPTransport sipTransport, string username, string password, string server)

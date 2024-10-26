@@ -10,7 +10,7 @@
     <StartupObject>Tortoise912.Program</StartupObject>
     <ApplicationIcon>R (21).ico</ApplicationIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <SignAssembly>False</SignAssembly>
+    <SignAssembly>True</SignAssembly>
     <AssemblyName>Tortoise 912</AssemblyName>
     <Title>Tortoise 912</Title>
     <Version>0.69.5</Version>
@@ -18,6 +18,7 @@
     <Authors>Nyx</Authors>
     <Copyright>Nyx Gallini 2025</Copyright>
     <UseWPF>True</UseWPF>
+    <AssemblyOriginatorKeyFile>Tortoise912_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -64,6 +65,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ringtone.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>settings.Designer.cs</LastGenOutput>

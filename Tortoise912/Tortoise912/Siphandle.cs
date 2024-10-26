@@ -69,13 +69,14 @@ namespace Tortoise912
 			regUserAgent.RegistrationSuccessful += (uri, resp) => Log.LogInformation($"{uri} registration succeeded.");
 		}
 
-		internal static bool SippyPWCheck(SIPTransport sipTransport, string username, string password, string server)
+		internal static int SippyPWCheck(SIPTransport sipTransport, string username, string password, string server)
 		{
 			//Log = AddConsoleLogger(LogEventLevel.Verbose);
 			_regUserAgent = new SIPRegistrationUserAgent(sipTransport, username, password, server, 5);
 			sipTransport.EnableTraceLogs();
 
 			int stat = 69;
+			regUserAgent.Start();
 
 			// Event handlers for the different stages of the registration.
 			regUserAgent.RegistrationFailed += (uri, resp, err) => stat = 1;
@@ -84,22 +85,7 @@ namespace Tortoise912
 			regUserAgent.RegistrationSuccessful += (uri, resp) => stat = 0;
 			regUserAgent.Stop();
 
-			switch (stat)
-			{
-				case 1:
-
-				//Fail
-				case 2:
-				case 9:
-					return false;
-
-				case 0:
-					return true;
-
-				case 69:
-				default:
-					return false;
-			}
+			return stat;
 		}
 	}
 }

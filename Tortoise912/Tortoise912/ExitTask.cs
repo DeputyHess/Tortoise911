@@ -20,6 +20,7 @@ namespace Tortoise912
 				Task.Delay(1500).Wait();
 
 				Siphandle.sipTransport.Shutdown();
+				Task.Delay(1500).Wait();
 			}
 			catch (NullReferenceException ex) { }
 

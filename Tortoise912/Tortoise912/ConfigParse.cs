@@ -70,14 +70,14 @@ namespace Tortoise912
 									{
 										if (searchHeadder.Length > 0 && searchHeadder == line)
 										{
-											File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\Headder.txt", line);
+											File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\Headder.txt", line);
 										}
 									};
 									break;
 
 								case "GE":
 #if DEBUG
-									File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\GET.txt", line);
+									File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\GET.txt", line);
 #endif
 									try
 									{
@@ -144,7 +144,18 @@ namespace Tortoise912
 										{
 											number = line.Substring(24, line.Length - 24);
 											number = Regex.Replace(number, "[\"]", string.Empty);
+											var spltscl = number.Split(";");
+											spltscl = spltscl[0].Split(":");
+											number = "sip:" + spltscl[0];
 											CONFstor.SIP_CONTROLLER_LIST = number;
+											try
+											{
+												Application.UserAppDataRegistry.SetValue("SIPSV", number);
+											}
+											catch (Exception ex)
+											{
+												MessageBox.Show(ex.Message);
+											}
 										}
 									}
 									if (line.Contains("SET SIPSIGNAL") == true) { }
@@ -205,7 +216,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}*/
 									if (line.Contains("SET ENABLE_L1") == true)
@@ -223,7 +234,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_L2") == true)
@@ -241,7 +252,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_L3") == true)
@@ -259,7 +270,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_L4") == true)
@@ -277,7 +288,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_L5") == true)
@@ -295,7 +306,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_L6") == true)
@@ -313,7 +324,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_1_DN") == true)
@@ -332,7 +343,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_2_DN") == true)
@@ -351,7 +362,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_3_DN") == true)
@@ -370,7 +381,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_4_DN") == true)
@@ -389,7 +400,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_5_DN") == true)
@@ -408,7 +419,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_6_DN") == true)
@@ -427,7 +438,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_1_TXT") == true)
@@ -439,7 +450,7 @@ namespace Tortoise912
 											CONFstor.LINE_1_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_2_TXT") == true)
@@ -451,7 +462,7 @@ namespace Tortoise912
 											CONFstor.LINE_2_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_3_TXT") == true)
@@ -463,7 +474,7 @@ namespace Tortoise912
 											CONFstor.LINE_3_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_4_TXT") == true)
@@ -475,7 +486,7 @@ namespace Tortoise912
 											CONFstor.LINE_4_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_5_TXT") == true)
@@ -487,7 +498,7 @@ namespace Tortoise912
 											CONFstor.LINE_5_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET LINE_6_TXT") == true)
@@ -499,7 +510,7 @@ namespace Tortoise912
 											CONFstor.LINE_6_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF1") == true)
@@ -517,7 +528,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF2") == true)
@@ -535,7 +546,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF3") == true)
@@ -553,7 +564,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF4") == true)
@@ -571,7 +582,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF5") == true)
@@ -589,7 +600,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF6") == true)
@@ -607,7 +618,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF7") == true)
@@ -625,7 +636,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET ENABLE_XF8") == true)
@@ -643,7 +654,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF1_TXT") == true)
@@ -655,7 +666,7 @@ namespace Tortoise912
 											CONFstor.XF1_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF2_TXT") == true)
@@ -667,7 +678,7 @@ namespace Tortoise912
 											CONFstor.XF2_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF3_TXT") == true)
@@ -679,7 +690,7 @@ namespace Tortoise912
 											CONFstor.XF3_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF4_TXT") == true)
@@ -691,7 +702,7 @@ namespace Tortoise912
 											CONFstor.XF4_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF5_TXT") == true)
@@ -703,7 +714,7 @@ namespace Tortoise912
 											CONFstor.XF5_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF6_TXT") == true)
@@ -715,7 +726,7 @@ namespace Tortoise912
 											CONFstor.XF6_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF7_TXT") == true)
@@ -727,7 +738,7 @@ namespace Tortoise912
 											CONFstor.XF7_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF8_TXT") == true)
@@ -739,7 +750,7 @@ namespace Tortoise912
 											CONFstor.XF8_TXT = number;
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF1_CLR") == true)
@@ -759,7 +770,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF2_CLR") == true)
@@ -779,7 +790,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF3_CLR") == true)
@@ -799,7 +810,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF4_CLR") == true)
@@ -819,7 +830,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF5_CLR") == true)
@@ -839,7 +850,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF6_CLR") == true)
@@ -859,7 +870,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF7_CLR") == true)
@@ -879,7 +890,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF8_CLR") == true)
@@ -899,7 +910,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 									if (line.Contains("SET XF1_NUMB") == true) { }
@@ -926,7 +937,7 @@ namespace Tortoise912
 											}
 										}
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\SET.txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\SET.txt", number);
 #endif
 									}
 
@@ -942,7 +953,7 @@ namespace Tortoise912
 										if (line.Length > 0) { number = line.Substring(4, line.Length - 4); }
 										searchHeadder = $"# " + number;
 #if DEBUG
-										File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\" + number + ".txt", number);
+										File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\" + number + ".txt", number);
 #endif
 									}
 									break;
@@ -952,7 +963,7 @@ namespace Tortoise912
 									{
 										if (Application.UserAppDataRegistry.GetValue("PROV_GRP") != null)
 										{
-											if (Application.UserAppDataRegistry.GetValue("PROV_GRP").ToString() == "False")
+											if (Application.UserAppDataRegistry.GetValue("PROV_GRP").ToString() != "False")
 											{
 												//IF cmd
 												if (line.Contains($"IF $GROUP SEQ " + Application.UserAppDataRegistry.GetValue("PROV_GRP").ToString()))
@@ -961,7 +972,7 @@ namespace Tortoise912
 													searchHeadder = $"# " + number;
 													searchmode = true;
 #if DEBUG
-													File.WriteAllText(@"X:\Tortoise911\Tortoise911\Tortoise912\Tortoise912\bin\Debug\config\IF.txt", line + $"||||" + searchHeadder);
+													File.WriteAllText(@"B:\Tortoise911\Tortoise912\DEBUGCONF\IF.txt", line + $"||||" + searchHeadder);
 #endif
 												}
 											}

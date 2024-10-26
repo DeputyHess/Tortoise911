@@ -651,11 +651,16 @@ namespace Tortoise912
 		/// <param name="e"></param>
 		private void conftimer_Tick(object sender, EventArgs e)
 		{
-			ConfigParse.parse();
-			Invoke(() =>
+			try 
 			{
-				RefreshButtons();
-			});
+				ConfigParse.parse();
+				Invoke(() =>
+				{
+					RefreshButtons();
+				});
+			}
+			catch(Exception ex) { }
+			
 		}
 
 		/// <summary>

@@ -30,7 +30,30 @@ namespace Tortoise912
 			{
 				if (Application.UserAppDataRegistry.GetValue("SIPSV") != null)
 				{
-					Siphandle.SippyPWCheck(Siphandle.sipTransport, usernameBOX.Text, passwordBOX.Text, Application.UserAppDataRegistry.GetValue("SIPSV").ToString());
+					int rcod = 0;
+					rcod = Siphandle.SippyPWCheck(Siphandle.sipTransport, usernameBOX.Text, passwordBOX.Text, Application.UserAppDataRegistry.GetValue("SIPSV").ToString());
+
+					switch (rcod) 
+					{
+						case 0:
+							grant = true;
+							break;
+						case 1:
+							ecod = 81;
+							break;
+						case 2:
+							ecod = 82;
+							break;
+						case 9:
+							ecod = 89;
+							break;
+						case 69:
+							ecod = 75;
+							break;
+						default:
+							ecod = 75;
+							break;
+					}
 				}
 				else
 				{
@@ -52,7 +75,7 @@ namespace Tortoise912
 			{
 				if (ecod == 99)
 				{
-					MessageBox.Show("Login Failure");
+					MessageBox.Show("Login Failure - Check Ext and Password");
 				}
 				else if (ecod == 1)
 				{
@@ -72,7 +95,11 @@ namespace Tortoise912
 					}
 #endif
 				}
-				else { MessageBox.Show("Login Failure"); }
+				else if (ecod == 81) { MessageBox.Show("Login Failure - Registration Failed"); }
+				else if (ecod == 82) { MessageBox.Show("Login Failure - Registration Temporary Failure"); }
+				else if (ecod == 89) { MessageBox.Show("Login Failure - Registration Removed"); }
+				else if (ecod == 75) { MessageBox.Show("Login Failure - Unknown"); }
+				else { MessageBox.Show("Login Failure - Unknown"); }
 			}
 		}
 

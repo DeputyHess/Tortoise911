@@ -26,6 +26,7 @@ using SIPSorcery.SIP.App;
 using SIPSorceryMedia.Abstractions;
 using SIPSorceryMedia.Encoders;
 using SIPSorceryMedia.Windows;
+using Tortoise912;
 
 namespace SIPSorcery.SoftPhone
 {
@@ -34,17 +35,17 @@ namespace SIPSorcery.SoftPhone
         private static string _sdpMimeContentType = SDP.SDP_MIME_CONTENTTYPE;
         private static int TRANSFER_RESPONSE_TIMEOUT_SECONDS = 10;
 
-        private string m_sipUsername = SIPSoftPhoneState.SIPUsername;
-        private string m_sipPassword = SIPSoftPhoneState.SIPPassword;
-        private string m_sipServer = SIPSoftPhoneState.SIPServer;
-        private string m_sipFromName = SIPSoftPhoneState.SIPFromName;
+        private string m_sipUsername = CONFstor.SUS;
+        private string m_sipPassword = CONFstor.SPW;
+        private string m_sipServer = CONFstor.SIP_CONTROLLER_LIST;
+        private string m_sipFromName = CONFstor.SUS;
 
         private SIPTransport m_sipTransport;
         private SIPUserAgent m_userAgent;
         private SIPServerUserAgent m_pendingIncomingCall;
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
-        private int m_audioOutDeviceIndex = SIPSoftPhoneState.AudioOutDeviceIndex;
+        private int m_audioOutDeviceIndex = 0;
 
         public event Action<SIPClient> CallAnswer;                 // Fires when an outgoing SIP call is answered.
         public event Action<SIPClient> CallEnded;                  // Fires when an incoming or outgoing call is over.

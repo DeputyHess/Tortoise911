@@ -15,7 +15,6 @@ using SIPSorcery.SIP.App;
 using SIPSorcery.SoftPhone;
 using SIPSorcery.Sys;
 using SIPSorceryMedia.Abstractions;
-using Tortoise912.Ext;
 
 namespace Tortoise912
 {
@@ -948,47 +947,20 @@ namespace Tortoise912
 		/// </summary>
 		private void ResetToCallStartState(SIPClient sipClient)
 		{
-			if (sipClient == null || sipClient == _sipClients[0])
-			{
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_callButton.Visibility = Visibility.Visible;
-					m_cancelButton.Visibility = Visibility.Collapsed;
-					m_byeButton.Visibility = Visibility.Collapsed;
-					m_answerButton.Visibility = Visibility.Collapsed;
-					m_rejectButton.Visibility = Visibility.Collapsed;
-					m_redirectButton.Visibility = Visibility.Collapsed;
-					m_transferButton.Visibility = Visibility.Collapsed;
-					m_holdButton.Visibility = Visibility.Collapsed;
-					m_offHoldButton.Visibility = Visibility.Collapsed;
-					_client0Video.Visibility = Visibility.Collapsed;
-					SetStatusText(m_signallingStatus, "Ready");
+			extNUMTXT.Text = "";
+			arrCdeTXT.Text = "";
+			provideridTXT.Text = "";
+			uriTXT.Text = "";
+			phNUMTXT.Text = "";
+			addrbox.Text = "";
+			statusTXT.Text = "";
+			methodTXT.Text = "";
+			mobilityTXT.Text = "";
+			callerbox.Text = "";
+			XText.Text = "";
+			yTXT.Text = "";
+			zTXT.Text = "";
 
-					//if (m_useAudioScope && _sipClients?.Count > 0 && sipClient == _sipClients[0] && sipClient.MediaSession != null)
-					//{
-					//    sipClient.MediaSession.OnAudioScopeSampleReady -= _audioScope0.ProcessSample;
-					//}
-				});
-			}
-
-			if (sipClient == null || sipClient == _sipClients[1])
-			{
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Visible;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-					m_answer2Button.Visibility = Visibility.Collapsed;
-					m_reject2Button.Visibility = Visibility.Collapsed;
-					m_redirect2Button.Visibility = Visibility.Collapsed;
-					m_transfer2Button.Visibility = Visibility.Collapsed;
-					m_hold2Button.Visibility = Visibility.Collapsed;
-					m_offHold2Button.Visibility = Visibility.Collapsed;
-					m_attendedTransferButton.Visibility = Visibility.Collapsed;
-					_client1Video.Visibility = Visibility.Collapsed;
-					SetStatusText(m_signallingStatus, "Ready");
-				});
-			}
 		}
 
 		/// <summary>
@@ -1059,16 +1031,7 @@ namespace Tortoise912
 			{
 				_sipClients[0].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_callButton.Visibility = Visibility.Collapsed;
-					m_cancelButton.Visibility = Visibility.Collapsed;
-					m_byeButton.Visibility = Visibility.Collapsed;
-
-					m_answerButton.Visibility = Visibility.Visible;
-					m_rejectButton.Visibility = Visibility.Visible;
-					m_redirectButton.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1076,16 +1039,7 @@ namespace Tortoise912
 			{
 				_sipClients[1].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-
-					m_answer2Button.Visibility = Visibility.Visible;
-					m_reject2Button.Visibility = Visibility.Visible;
-					m_redirect2Button.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1093,16 +1047,7 @@ namespace Tortoise912
 			{
 				_sipClients[2].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-
-					m_answer2Button.Visibility = Visibility.Visible;
-					m_reject2Button.Visibility = Visibility.Visible;
-					m_redirect2Button.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1110,16 +1055,7 @@ namespace Tortoise912
 			{
 				_sipClients[3].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-
-					m_answer2Button.Visibility = Visibility.Visible;
-					m_reject2Button.Visibility = Visibility.Visible;
-					m_redirect2Button.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1127,16 +1063,7 @@ namespace Tortoise912
 			{
 				_sipClients[4].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-
-					m_answer2Button.Visibility = Visibility.Visible;
-					m_reject2Button.Visibility = Visibility.Visible;
-					m_redirect2Button.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1144,16 +1071,7 @@ namespace Tortoise912
 			{
 				_sipClients[5].Accept(sipRequest);
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Collapsed;
-
-					m_answer2Button.Visibility = Visibility.Visible;
-					m_reject2Button.Visibility = Visibility.Visible;
-					m_redirect2Button.Visibility = Visibility.Visible;
-				});
+				//Set Call Screen up for Call
 
 				return true;
 			}
@@ -1169,76 +1087,14 @@ namespace Tortoise912
 		/// </summary>
 		private async void SIPCallAnswered(SIPClient client)
 		{
-			if (client == _sipClients[0])
-			{
+
 				if (_sipClients[1].IsCallActive && !_sipClients[1].IsOnHold)
 				{
 					//_sipClients[1].PutOnHold(_onHoldAudioScopeGL);
 					await _sipClients[1].PutOnHold();
 				}
 
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_answerButton.Visibility = Visibility.Collapsed;
-					m_rejectButton.Visibility = Visibility.Collapsed;
-					m_redirectButton.Visibility = Visibility.Collapsed;
-					m_callButton.Visibility = Visibility.Collapsed;
-					m_cancelButton.Visibility = Visibility.Collapsed;
-					m_byeButton.Visibility = Visibility.Visible;
-					m_transferButton.Visibility = Visibility.Visible;
-					m_holdButton.Visibility = Visibility.Visible;
-
-					m_call2ActionsGrid.IsEnabled = true;
-
-					if (_sipClients[0].MediaSession.HasVideo)
-					{
-						_sipClients[0].MediaSession.OnVideoSinkSample += (sample, width, height, stride, pixelFormat) => VideoSampleReady(sample, width, height, stride, pixelFormat, _client0WriteableBitmap, _client0Video);
-						_client0Video.Visibility = Visibility.Visible;
-					}
-
-					//if (m_useAudioScope)
-					//{
-					//    _sipClients[0].MediaSession.OnAudioScopeSampleReady += _audioScope0.ProcessSample;
-					//}
-				});
-			}
-			else if (client == _sipClients[1])
-			{
-				Dispatcher.DoOnUIThread(() =>
-				{
-					m_answer2Button.Visibility = Visibility.Collapsed;
-					m_reject2Button.Visibility = Visibility.Collapsed;
-					m_redirect2Button.Visibility = Visibility.Collapsed;
-					m_call2Button.Visibility = Visibility.Collapsed;
-					m_cancel2Button.Visibility = Visibility.Collapsed;
-					m_bye2Button.Visibility = Visibility.Visible;
-					m_transfer2Button.Visibility = Visibility.Visible;
-					m_hold2Button.Visibility = Visibility.Visible;
-					m_attendedTransferButton.Visibility = Visibility.Visible;
-
-					if (_sipClients[1].MediaSession.HasVideo)
-					{
-						_sipClients[1].MediaSession.OnVideoSinkSample += (sample, width, height, stride, pixelFormat) => VideoSampleReady(sample, width, height, stride, pixelFormat, _client1WriteableBitmap, _client1Video);
-						_client1Video.Visibility = Visibility.Visible;
-					}
-				});
-
-				if (_sipClients[0].IsCallActive)
-				{
-					if (!_sipClients[0].IsOnHold)
-					{
-						//_sipClients[0].PutOnHold(_onHoldAudioScopeGL);
-						await _sipClients[0].PutOnHold();
-					}
-
-					Dispatcher.DoOnUIThread(() =>
-					{
-						m_holdButton.Visibility = Visibility.Collapsed;
-						m_offHoldButton.Visibility = Visibility.Visible;
-						m_attendedTransferButton.Visibility = Visibility.Visible;
-					});
-				}
-			}
+				//Gen Addr, Provider, Etc
 		}
 
 		/// <summary>

@@ -36,8 +36,6 @@ namespace SIPSorcery.SoftPhone
 
         private ILogger logger = SIPSorcery.LogFactory.CreateLogger<SIPTransportManager>();
 
-        private XmlNode m_sipSocketsNode = SIPSoftPhoneState.SIPSocketsNode;    // Optional XML node that can be used to configure the SIP channels used with the SIP transport layer.
-
         private bool _isInitialised = false;
         public SIPTransport SIPTransport { get; private set; }
         private UdpClient _homerSIPClient;
@@ -83,7 +81,7 @@ namespace SIPSorcery.SoftPhone
                     SIPTransport = new SIPTransport();
                     bool sipChannelAdded = false;
 
-                    if (m_sipSocketsNode != null)
+                    /*if (m_sipSocketsNode != null)
                     {
                         // Set up the SIP channels based on the app.config file.
                         List<SIPChannel> sipChannels = SIPTransportConfig.ParseSIPChannelsNode(m_sipSocketsNode);
@@ -92,7 +90,7 @@ namespace SIPSorcery.SoftPhone
                             SIPTransport.AddSIPChannel(sipChannels);
                             sipChannelAdded = true;
                         }
-                    }
+                    }*/
 
                     if (sipChannelAdded == false)
                     {

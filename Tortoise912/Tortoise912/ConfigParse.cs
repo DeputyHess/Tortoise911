@@ -16,6 +16,8 @@ namespace Tortoise912
 	{
 		internal static void parse()
 		{
+			ConfigFileBullshit config = new ConfigFileBullshit();
+			config.getconf();
 			try
 			{
 				using (WebClient WC = new WebClient())
@@ -30,9 +32,9 @@ namespace Tortoise912
 
 					try
 					{
-						if (Application.UserAppDataRegistry.GetValue("PROV_URL") != null)
+						if (config.Provurl != null)
 						{
-							content = WC.DownloadString(Application.UserAppDataRegistry.GetValue("PROV_URL").ToString() + "46xxsettings.txt");
+							content = WC.DownloadString(config.Provurl + "46xxsettings.txt");
 						}
 					}
 					catch (Exception ex)
@@ -45,7 +47,7 @@ namespace Tortoise912
 					if (finenewfile == true)
 					{
 						finenewfile = false;
-						content = WC.DownloadString(Application.UserAppDataRegistry.GetValue("PROV_URL").ToString() + newfile);
+						content = WC.DownloadString(config.Provurl + newfile);
 					}
 					var split = content.Split($"\r\n");
 					foreach (string line in split)
@@ -83,11 +85,11 @@ namespace Tortoise912
 #endif
 									try
 									{
-										if (Application.UserAppDataRegistry.GetValue("PROV_GRP") != null)
+										if (config.Provgrp != null)
 										{
 											//get cmd
 											//Pull another file from server
-											if (line.Contains("46xxsettings-" + Application.UserAppDataRegistry.GetValue("PROV_GRP").ToString()) == true)
+											if (line.Contains("46xxsettings-" + config.Provgrp) == true)
 											{
 												finenewfile = true;
 												if (line.Length > 0) { number = line.Substring(4, line.Length - 4); }

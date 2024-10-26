@@ -3,6 +3,8 @@
 *   This program is distributed WITHOUT WARRANTY.
 */
 
+using System.IO;
+
 namespace Tortoise912
 {
 	internal class ConfigFileBullshit

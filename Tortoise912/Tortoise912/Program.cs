@@ -19,7 +19,7 @@ namespace Tortoise912
 			try
 			{
 				ConfigFileBullshit config = new ConfigFileBullshit();
-				config.GetType();
+				config.getconf();
 				if (config.Provurl != null || config.Provgrp != null)
 				{
 				}

@@ -67,6 +67,7 @@ namespace Tortoise912
 
 			if (grant == true)
 			{
+				CONFstor.grant = true;
 				CONFstor.SUS = usernameBOX.Text;
 				CONFstor.SPW = passwordBOX.Text;
 				this.Hide();

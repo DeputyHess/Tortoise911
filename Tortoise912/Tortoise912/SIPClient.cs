@@ -173,7 +173,7 @@ namespace SIPSorcery.SoftPhone
         {
             if (m_pendingIncomingCall == null)
             {
-                StatusMessage(this, $"There was no pending call available to answer.");
+                //StatusMessage(this, $"There was no pending call available to answer.");
                 return false;
             }
             else

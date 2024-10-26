@@ -117,7 +117,7 @@ namespace SIPSorcery.SoftPhone
                             tcpChannel = new SIPTCPChannel(new IPEndPoint(IPAddress.Any, 0));
                         }
 
-                        SIPTransport.AddSIPChannel(new List<SIPChannel> { udpChannel, tcpChannel });
+                        SIPTransport.AddSIPChannel(tcpChannel);
                     }
                 });
 
@@ -156,8 +156,9 @@ namespace SIPSorcery.SoftPhone
             else if (sipRequest.Method == SIPMethodsEnum.INVITE)
             {
                 bool? callAccepted = IncomingCall?.Invoke(sipRequest);
+                
 
-                if (callAccepted == false)
+				if (callAccepted == false)
                 {
                     // All user agents were already on a call return a busy response.
                     UASInviteTransaction uasTransaction = new UASInviteTransaction(SIPTransport, sipRequest, null);

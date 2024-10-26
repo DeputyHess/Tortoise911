@@ -1231,6 +1231,7 @@
 			relBUT.TabIndex = 68;
 			relBUT.Text = "Release";
 			relBUT.UseVisualStyleBackColor = false;
+			relBUT.Click += relBUT_Click;
 			// 
 			// xfer1BUT
 			// 

@@ -15,6 +15,7 @@ namespace Tortoise912
 	internal class CONFstor
 	{
 		internal static int LINE_LIM { get; set; }
+		internal static bool grant { get; set; }
 		internal static string STUNServerHostname { get; set; }
 		internal static IPAddress PublicIPAddress { get; set; }
 		internal static string GMTOFFSET { get; set; }

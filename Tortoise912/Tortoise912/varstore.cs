@@ -16,6 +16,7 @@ namespace Tortoise912
 	{
 		internal static bool _tauth = false;
 
+		internal static int cunt { get; set; }
 		internal static bool tauth
 		{
 			get

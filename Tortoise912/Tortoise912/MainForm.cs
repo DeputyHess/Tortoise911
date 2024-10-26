@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,6 +65,7 @@ namespace Tortoise912
 		internal CallsRegStor.L5Call CRS5 = new CallsRegStor.L5Call();
 		internal CallsRegStor.L6Call CRS6 = new CallsRegStor.L6Call();
 		internal int actline = 99;
+		internal bool incoc = false;
 
 		/// <summary>
 		/// CleanTimer
@@ -84,7 +87,7 @@ namespace Tortoise912
 				usersnamelab.Text = CONFstor.LOGUSR;
 			}
 			RefreshButtons();
-
+			varstore.cunt = 0;
 			if (varstore.tauth == true && Settings.Default.Dbug == false)
 			{
 				this.Text = $"Tortoise 912 *TEMPORARY LOGIN* User:" + usersnamelab.Text;
@@ -111,6 +114,7 @@ namespace Tortoise912
 				{
 					conftimer.Interval = (int.Parse(System.Windows.Forms.Application.UserAppDataRegistry.GetValue("POLLING_P").ToString()) * 60 * 1000);
 				}
+				else { conftimer.Interval = 65000; }
 			}
 			catch (Exception ex)
 			{
@@ -150,6 +154,19 @@ namespace Tortoise912
 					CONFstor.PublicIPAddress = ip;
 				};
 				_stunClient.Run();
+			}
+			if (CONFstor.grant != null) 
+			{
+				if (CONFstor.grant == false) 
+				{
+					statusTXT.BackColor = Color.Red; statusTXT.ForeColor = Color.Black;
+					statusTXT.Text = "Unprovisioned";
+				}
+				else if (CONFstor.grant == true)
+				{
+					statusTXT.BackColor = Color.Silver; statusTXT.ForeColor = Color.Black;
+					statusTXT.Text = "SIP IP Softphone";
+				}
 			}
 
 
@@ -742,7 +759,7 @@ namespace Tortoise912
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void timetimer_Tick(object sender, EventArgs e)
+		private async void timetimer_Tick(object sender, EventArgs e)
 		{
 			timeLAB.Text = DateTime.Now.ToString("HH:MM:ss");
 			dateLAB.Text = DateTime.Now.ToString("MM/dd/yyyy");
@@ -750,6 +767,18 @@ namespace Tortoise912
 			{
 				if (Line1BUT.BackColor == Color.Red) { Line1BUT.BackColor = Color.Blue; }
 				else { Line1BUT.BackColor = Color.Red; }
+				if (varstore.cunt == 7 || varstore.cunt == 0) 
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav")) 
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
+				
+				varstore.cunt++;
+				//var client = _sipClients[0];
+				//await AnswerCallAsync(client);
 			}
 			else if (L2FT == true)
 			{
@@ -783,7 +812,7 @@ namespace Tortoise912
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void conftimer_Tick(object sender, EventArgs e)
+		private async void conftimer_Tick(object sender, EventArgs e)
 		{
 			try
 			{
@@ -948,30 +977,47 @@ namespace Tortoise912
 		/// </summary>
 		private void ResetToCallStartState(SIPClient sipClient)
 		{
-			extNUMTXT.Text = "";
-			arrCdeTXT.Text = "";
-			provideridTXT.Text = "";
-			uriTXT.Text = "";
-			phNUMTXT.Text = "";
-			addrbox.Text = "";
-			statusTXT.Text = "";
-			methodTXT.Text = "";
-			mobilityTXT.Text = "";
-			callerbox.Text = "";
-			XText.Text = "";
-			yTXT.Text = "";
-			zTXT.Text = "";
+			string MBT = "";
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
+			{
+				UpdateTextBox(mobilityTXT, MBT);
+				UpdateTextBox(mobilityTXT, Color.DarkGray);
+				UpdateTextBox(zTXT, MBT);
+				UpdateTextBox(yTXT, MBT);
+				UpdateTextBox(XText, MBT);
+				UpdateTextBox(callerbox, MBT);
+				UpdateTextBox(callerbox, MBT);
+				UpdateTextBox(statusTXT, MBT);
+				UpdateTextBox(methodTXT, MBT);
+				UpdateTextBox(addrbox, MBT);
+				UpdateTextBox(phNUMTXT, MBT);
+				UpdateTextBox(uriTXT, MBT);
+				UpdateTextBox(provideridTXT, MBT);
+				UpdateTextBox(arrCdeTXT, MBT);
+				UpdateTextBox(extNUMTXT, MBT);
+				ResetFlashTrigs();
+			});
 
 		}
 
+		internal void ResetFlashTrigs() 
+		{
+			L1FT = false;
+			L2FT = false;
+			L3FT = false;
+			L4FT = false;
+			L5FT = false;
+			L6FT = false;
+		}
 		/// <summary>
 		/// Update Text Box Text
 		/// </summary>
 		/// <param name="box"></param>
 		/// <param name="text"></param>
-		public void UpdateTextBox(TextBox box,string text)
+		public void UpdateTextBox(TextBox box, string text)
 		{
-			Invoke((MethodInvoker)delegate {
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
+			{
 				box.Text = text;
 			});
 		}
@@ -983,7 +1029,8 @@ namespace Tortoise912
 		/// <param name="text"></param>
 		public void UpdateTextBox(RichTextBox box, string text)
 		{
-			Invoke((MethodInvoker)delegate {
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
+			{
 				box.Text = text;
 			});
 		}
@@ -994,10 +1041,13 @@ namespace Tortoise912
 		/// <param name="Color"></param>
 		public void UpdateTextBox(TextBox box, Color Color)
 		{
-			Invoke((MethodInvoker)delegate {
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
+			{
 				box.BackColor = Color;
 			});
 		}
+
+		internal void Setincoc() { incoc = true; }
 
 		/// <summary>
 		/// Checks if there is a client that can accept the call and if so sets up the UI
@@ -1005,20 +1055,24 @@ namespace Tortoise912
 		/// </summary>
 		private bool SIPCallIncoming(SIPRequest sipRequest)
 		{
-			Invoke((MethodInvoker)delegate
+			
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
+			{
+				Setincoc();
+			});
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(callerbox, sipRequest.Header.From.FriendlyDescription());
 			});
-
 			string tmptpn = sipRequest.Header.CallId;
 			tmptpn = tmptpn.Substring(3, tmptpn.Length - 3);
 			string arcd = tmptpn.Substring(0, 3);
 
-			Invoke((MethodInvoker)delegate
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(arrCdeTXT, arcd);
 			});
-			Invoke((MethodInvoker)delegate
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(phNUMTXT, tmptpn);
 			});
@@ -1048,11 +1102,11 @@ namespace Tortoise912
 					MBC = Color.Red;
 					break;
 			}
-			Invoke((MethodInvoker)delegate
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(mobilityTXT, MBT);
 			});
-			Invoke((MethodInvoker)delegate
+			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				UpdateTextBox(mobilityTXT, MBC);
 			});
@@ -1085,7 +1139,7 @@ namespace Tortoise912
 			{
 				L1FT = true;
 			}
-			try 
+			try
 			{
 				if (!_sipClients[0].IsCallActive)
 				{
@@ -1139,9 +1193,10 @@ namespace Tortoise912
 				{
 					return false;
 				}
-			} catch (Exception ex) 
+			}
+			catch (Exception ex)
 			{ return false; }
-			
+
 		}
 
 		/// <summary>
@@ -1151,7 +1206,7 @@ namespace Tortoise912
 		private async void SIPCallAnswered(SIPClient client)
 		{
 
-				//Gen Addr, Provider, Etc
+			//Gen Addr, Provider, Etc
 		}
 
 		/// <summary>
@@ -1161,7 +1216,8 @@ namespace Tortoise912
 		private void HngUpCall(object sender)
 		{
 			var client = _sipClients[0];
-			switch (actline) 
+			bool FAFO = false;
+			switch (actline)
 			{
 				case 1:
 					client = _sipClients[0];
@@ -1182,11 +1238,16 @@ namespace Tortoise912
 					client = _sipClients[5];
 					break;
 				default:
+					FAFO = true;
 					break;
 			}
-			client.Hangup();
+			if (FAFO == false) 
+			{
+				client.Hangup();
 
-			ResetToCallStartState(client);
+				ResetToCallStartState(client);
+			}
+			
 		}
 
 		/// <summary>
@@ -1220,7 +1281,6 @@ namespace Tortoise912
 			{
 				client = _sipClients[5];
 			}
-
 			await AnswerCallAsync(client);
 		}
 
@@ -1262,7 +1322,7 @@ namespace Tortoise912
 			//If - Active = False and New Call = faslse..
 			//Do nothing
 
-			if (L1Act == false && L1H == false)
+			if (incoc == true && L1Act == false && L1H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1311,7 +1371,7 @@ namespace Tortoise912
 
 		private void Line2BUT_Click(object sender, EventArgs e)
 		{
-			if (L2Act == false && L2H == false)
+			if (incoc == true && L2Act == false && L2H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1358,7 +1418,7 @@ namespace Tortoise912
 
 		private void Line3BUT_Click(object sender, EventArgs e)
 		{
-			if (L3Act == false && L3H == false)
+			if (incoc == true && L3Act == false && L3H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1405,7 +1465,7 @@ namespace Tortoise912
 
 		private void Line4BUT_Click(object sender, EventArgs e)
 		{
-			if (L4Act == false && L4H == false)
+			if (incoc == true && L4Act == false && L4H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1452,7 +1512,7 @@ namespace Tortoise912
 
 		private void Line5BUT_Click(object sender, EventArgs e)
 		{
-			if (L5Act == false && L5H == false)
+			if (incoc == true && L5Act == false && L5H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1499,7 +1559,7 @@ namespace Tortoise912
 
 		private void Line6BUT_Click(object sender, EventArgs e)
 		{
-			if (L6Act == false && L6H == false)
+			if (incoc == true && L6Act == false && L6H == false)
 			{
 				AwnCall(sender);
 			}
@@ -1550,7 +1610,7 @@ namespace Tortoise912
 		/// <param name="sender"></param>
 		private void Archivecallstatus(object sender)
 		{
-			if (sender == Line1BUT) 
+			if (sender == Line1BUT)
 			{
 				CRS1.Ext = extNUMTXT.Text;
 				CRS1.AreaCode = arrCdeTXT.Text;
@@ -1566,7 +1626,7 @@ namespace Tortoise912
 				CRS1.YCORD = yTXT.Text;
 				CRS1.ZCORD = zTXT.Text;
 			}
-			else if (sender == Line2BUT) 
+			else if (sender == Line2BUT)
 			{
 				CRS2.Ext = extNUMTXT.Text;
 				CRS2.AreaCode = arrCdeTXT.Text;
@@ -1582,7 +1642,7 @@ namespace Tortoise912
 				CRS2.YCORD = yTXT.Text;
 				CRS2.ZCORD = zTXT.Text;
 			}
-			else if (sender == Line3BUT) 
+			else if (sender == Line3BUT)
 			{
 				CRS3.Ext = extNUMTXT.Text;
 				CRS3.AreaCode = arrCdeTXT.Text;
@@ -1598,7 +1658,7 @@ namespace Tortoise912
 				CRS3.YCORD = yTXT.Text;
 				CRS3.ZCORD = zTXT.Text;
 			}
-			else if (sender == Line4BUT) 
+			else if (sender == Line4BUT)
 			{
 				CRS4.Ext = extNUMTXT.Text;
 				CRS4.AreaCode = arrCdeTXT.Text;
@@ -1614,7 +1674,7 @@ namespace Tortoise912
 				CRS4.YCORD = yTXT.Text;
 				CRS4.ZCORD = zTXT.Text;
 			}
-			else if (sender == Line5BUT) 
+			else if (sender == Line5BUT)
 			{
 				CRS5.Ext = extNUMTXT.Text;
 				CRS5.AreaCode = arrCdeTXT.Text;
@@ -1630,7 +1690,7 @@ namespace Tortoise912
 				CRS5.YCORD = yTXT.Text;
 				CRS5.ZCORD = zTXT.Text;
 			}
-			else if (sender == Line6BUT) 
+			else if (sender == Line6BUT)
 			{
 				CRS6.Ext = extNUMTXT.Text;
 				CRS6.AreaCode = arrCdeTXT.Text;
@@ -1652,9 +1712,9 @@ namespace Tortoise912
 		/// Take all the Call Specific Values from store and display them
 		/// </summary>
 		/// <param name="sender"></param>
-		private void RestoreCallStatus(object sender) 
+		private void RestoreCallStatus(object sender)
 		{
-			if (sender == Line1BUT) 
+			if (sender == Line1BUT)
 			{
 				extNUMTXT.Text = CRS1.Ext;
 				arrCdeTXT.Text = CRS1.AreaCode;
@@ -1670,7 +1730,7 @@ namespace Tortoise912
 				yTXT.Text = CRS1.YCORD;
 				zTXT.Text = CRS1.ZCORD;
 			}
-			else if (sender == Line2BUT) 
+			else if (sender == Line2BUT)
 			{
 				extNUMTXT.Text = CRS2.Ext;
 				arrCdeTXT.Text = CRS2.AreaCode;
@@ -1686,7 +1746,7 @@ namespace Tortoise912
 				yTXT.Text = CRS2.YCORD;
 				zTXT.Text = CRS2.ZCORD;
 			}
-			else if (sender == Line3BUT) 
+			else if (sender == Line3BUT)
 			{
 				extNUMTXT.Text = CRS3.Ext;
 				arrCdeTXT.Text = CRS3.AreaCode;
@@ -1702,7 +1762,7 @@ namespace Tortoise912
 				yTXT.Text = CRS3.YCORD;
 				zTXT.Text = CRS3.ZCORD;
 			}
-			else if (sender == Line4BUT) 
+			else if (sender == Line4BUT)
 			{
 				extNUMTXT.Text = CRS4.Ext;
 				arrCdeTXT.Text = CRS4.AreaCode;
@@ -1718,7 +1778,7 @@ namespace Tortoise912
 				yTXT.Text = CRS4.YCORD;
 				zTXT.Text = CRS4.ZCORD;
 			}
-			else if (sender == Line5BUT) 
+			else if (sender == Line5BUT)
 			{
 				extNUMTXT.Text = CRS5.Ext;
 				arrCdeTXT.Text = CRS5.AreaCode;
@@ -1734,7 +1794,7 @@ namespace Tortoise912
 				yTXT.Text = CRS5.YCORD;
 				zTXT.Text = CRS5.ZCORD;
 			}
-			else if (sender == Line6BUT) 
+			else if (sender == Line6BUT)
 			{
 				extNUMTXT.Text = CRS6.Ext;
 				arrCdeTXT.Text = CRS6.AreaCode;
@@ -1830,7 +1890,11 @@ namespace Tortoise912
 		/// <param name="e"></param>
 		private void holdBUT_Click(object sender, EventArgs e)
 		{
-			HldCll(sender);
+			if (actline != 99) 
+			{
+				HldCll(sender);
+			}
+			
 		}
 
 		/// <summary>
@@ -1903,8 +1967,13 @@ namespace Tortoise912
 			}
 
 		}
+
+		private void relBUT_Click(object sender, EventArgs e)
+		{
+			byebutton_Click(sender, e);
+		}
 	}
-	
+
 }
 
 		

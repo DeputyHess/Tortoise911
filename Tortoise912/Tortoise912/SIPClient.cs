@@ -219,7 +219,6 @@ namespace SIPSorcery.SoftPhone
         { 
             await MediaSession.PutOnHold();
             m_userAgent.PutOnHold();
-            StatusMessage(this, "Local party put on hold");
         }
 
         /// <summary>
@@ -229,7 +228,6 @@ namespace SIPSorcery.SoftPhone
         {
             MediaSession.TakeOffHold();
             m_userAgent.TakeOffHold();
-            StatusMessage(this, "Local party taken off on hold");
         }
 
         /// <summary>

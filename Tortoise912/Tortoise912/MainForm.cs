@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using Org.BouncyCastle.Asn1.X500;
@@ -18,6 +19,8 @@ using SIPSorcery.SIP.App;
 using SIPSorcery.SoftPhone;
 using SIPSorcery.Sys;
 using SIPSorceryMedia.Abstractions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Path = System.IO.Path;
 
 namespace Tortoise912
 {
@@ -166,9 +169,9 @@ namespace Tortoise912
 				};
 				_stunClient.Run();
 			}
-			if (CONFstor.grant != null) 
+			if (CONFstor.grant != null)
 			{
-				if (CONFstor.grant == false) 
+				if (CONFstor.grant == false)
 				{
 					statusTXT.BackColor = Color.Red; statusTXT.ForeColor = Color.Black;
 					statusTXT.Text = "Unprovisioned";
@@ -765,7 +768,7 @@ namespace Tortoise912
 			_sipRegistrationClient.Start();
 		}
 
-		private async void ringtimeout_Tick(object sender, EventArgs e) 
+		private async void ringtimeout_Tick(object sender, EventArgs e)
 		{
 			string MBT = "";
 			UpdateTextBox(mobilityTXT, MBT);
@@ -798,15 +801,15 @@ namespace Tortoise912
 			{
 				if (Line1BUT.BackColor == Color.Red) { Line1BUT.BackColor = Color.Blue; }
 				else { Line1BUT.BackColor = Color.Red; }
-				if (varstore.cunt == 7 || varstore.cunt == 0) 
+				if (varstore.cunt == 7 || varstore.cunt == 0)
 				{
-					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav")) 
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
 					{
 						player.Play();
 					}
 					varstore.cunt = 1;
 				}
-				
+
 				varstore.cunt++;
 				//var client = _sipClients[0];
 				//await AnswerCallAsync(client);
@@ -835,6 +838,19 @@ namespace Tortoise912
 			{
 				if (Line6BUT.BackColor == Color.Red) { Line6BUT.BackColor = Color.Blue; }
 				else { Line6BUT.BackColor = Color.Red; }
+			}
+
+			//TODO: Add other Lines to this
+			if (L1H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
 			}
 		}
 
@@ -876,9 +892,13 @@ namespace Tortoise912
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void button19_Click(object sender, EventArgs e)
+		private void noteBUT_Click(object sender, EventArgs e)
 		{
-			if (CLEANINGSCREEN == false) { }
+			if (CLEANINGSCREEN == false)
+			{
+				NoteWindow NW = new NoteWindow();
+				NW.ShowDialog();
+			}
 
 			//Open Notes Panel
 		}
@@ -1034,8 +1054,9 @@ namespace Tortoise912
 		/// <summary>
 		/// Gen Flash Trig Reset
 		/// </summary>
-		internal void ResetFlashTrigs() 
+		internal void ResetFlashTrigs()
 		{
+			//remove thiseventually. No need to do a 100% reset. Instead reset on line by line status
 			ringingline = 0;
 			L1FT = false;
 			L2FT = false;
@@ -1057,47 +1078,59 @@ namespace Tortoise912
 		internal void ResetFlashTrigs(int L)
 		{
 			ringingline = 0;
-			switch (L) 
+			switch (L)
 			{
 				case 1:
 					L1FT = false;
 					Line1BUT.BackColor = Color.DarkGray;
+					L1H = false;
+					L1Act = false;
 					break;
 				case 2:
 					Line2BUT.BackColor = Color.DarkGray;
 					L2FT = false;
+					L2H = false;
+					L2Act = false;
 					break;
 				case 3:
 					L3FT = false;
 					Line3BUT.BackColor = Color.DarkGray;
+					L3H = false;
+					L3Act = false;
 					break;
 				case 4:
 					L4FT = false;
 					Line4BUT.BackColor = Color.DarkGray;
+					L4H = false;
+					L4Act = false;
 					break;
 				case 5:
 					L5FT = false;
 					Line5BUT.BackColor = Color.DarkGray;
+					L5H = false;
+					L5Act = false;
 					break;
 				case 6:
 					L6FT = false;
 					Line6BUT.BackColor = Color.DarkGray;
+					L6H = false;
+					L6Act = false;
 					break;
 				default:
 					break;
 			}
-			
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
+
+
+
 		}
 
 		/// <summary>
@@ -1146,26 +1179,37 @@ namespace Tortoise912
 		/// </summary>
 		private bool SIPCallIncoming(SIPRequest sipRequest)
 		{
-			
+			string[] crnum = sipRequest.Header.From.FromURI.ToString().Split('@');
+			crnum = crnum[0].Split(":");
+			string crnumproc = "";
+			bool local = false;
+			string crnumproc1 = "";
+			if (crnum[1].Length < 10)
+			{
+				local = true;
+				crnumproc = crnum[1];
+			}
+			else
+			{
+				try
+				{
+					crnumproc1 = crnumproc.Substring(0, 3);
+					crnumproc = crnumproc.Substring(3, (crnumproc.Length - 3));
+				}
+				catch (Exception) { }
+				local = false;
+			}
 			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
 				Setincoc();
-			});
-			Invoke((System.Windows.Forms.MethodInvoker)delegate
-			{
-				UpdateTextBox(callerbox, sipRequest.Header.From.FromURI.ToString());
-			});
-			string tmptpn = sipRequest.Header.CallId;
-			tmptpn = tmptpn.Substring(3, tmptpn.Length - 3);
-			string arcd = tmptpn.Substring(0, 3);
-
-			Invoke((System.Windows.Forms.MethodInvoker)delegate
-			{
-				UpdateTextBox(arrCdeTXT, arcd);
-			});
-			Invoke((System.Windows.Forms.MethodInvoker)delegate
-			{
-				UpdateTextBox(phNUMTXT, tmptpn);
+				if (local == false)
+				{
+					UpdateTextBox(arrCdeTXT, crnumproc1);
+					UpdateTextBox(phNUMTXT, crnumproc);
+				}
+				else { UpdateTextBox(phNUMTXT, crnumproc); }
+				UpdateTextBox(callerbox, sipRequest.Header.From.FromName);
+				UpdateTextBox(uriTXT, sipRequest.Header.From.FromURI.ToString());
 			});
 
 
@@ -1310,7 +1354,7 @@ namespace Tortoise912
 			Random rng = new Random();
 			string MBT = "";
 			int rn = rng.Next(1, 20);
-			switch (rn) 
+			switch (rn)
 			{
 				case 1:
 					MBT = "AT&T";
@@ -1374,16 +1418,17 @@ namespace Tortoise912
 					break;
 
 			}
-			UpdateTextBox(provideridTXT,MBT);
+			UpdateTextBox(provideridTXT, MBT);
 			//Gen Addr, Provider, Etc
 		}
 		/// <summary>
 		/// Pickup The Call
 		/// </summary>
 		/// <param name="L"></param>
-		private void CallPickup() 
+		private void CallPickup()
 		{
 			int L = ringingline;
+			ringtimeout.Stop();
 			switch (L)
 			{
 				case 1:
@@ -1421,33 +1466,39 @@ namespace Tortoise912
 			{
 				case 1:
 					client = _sipClients[0];
+					L1H = false;
 					break;
 				case 2:
 					client = _sipClients[1];
+					L2H = false;
 					break;
 				case 3:
 					client = _sipClients[2];
+					L3H = false;
 					break;
 				case 4:
 					client = _sipClients[3];
+					L4H = false;
 					break;
 				case 5:
 					client = _sipClients[4];
+					L5H = false;
 					break;
 				case 6:
 					client = _sipClients[5];
+					L6H = false;
 					break;
 				default:
 					FAFO = true;
 					break;
 			}
-			if (FAFO == false) 
+			if (FAFO == false)
 			{
 				client.Hangup();
 
 				ResetToCallStartState(client);
 			}
-			
+
 		}
 
 		/// <summary>
@@ -1460,26 +1511,38 @@ namespace Tortoise912
 			if (sender == Line1BUT)
 			{
 				client = _sipClients[0];
+				actline = 1;
+				L1Act = true;
 			}
 			if (sender == Line2BUT)
 			{
 				client = _sipClients[1];
+				actline = 2;
+				L2Act = true;
 			}
 			if (sender == Line3BUT)
 			{
 				client = _sipClients[2];
+				actline = 3;
+				L3Act = true;
 			}
 			if (sender == Line4BUT)
 			{
 				client = _sipClients[3];
+				actline = 4;
+				L4Act = true;
 			}
 			if (sender == Line5BUT)
 			{
 				client = _sipClients[4];
+				actline = 5;
+				L5Act = true;
 			}
 			if (sender == Line6BUT)
 			{
 				client = _sipClients[5];
+				actline = 6;
+				L6Act = true;
 			}
 			await AnswerCallAsync(client);
 		}
@@ -1521,287 +1584,308 @@ namespace Tortoise912
 			//Hold Other button Pickup or Unhold This call if was on hold
 			//If - Active = False and New Call = faslse..
 			//Do nothing
-
-			if (incoc == true && L1Act == false && L1H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L1Act == false && L1H == false)
+				{
+					AwnCall(sender);
+					L1Act = true;
+				}
+				else if (L1Act == true && L1H == true)
+				{
+					UHldCll(sender);
+				}
+				else if (L1Act == false && L2Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L1Act == false && L3Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L1Act == false && L4Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L1Act == false && L5Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L1Act == false && L6Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L1Act == true && L1H == true)
-			{
-				//Unhold call
-			}
-			else if (L1Act == false && L2Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L1Act == false && L3Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L1Act == false && L4Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L1Act == false && L5Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L1Act == false && L6Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-
-
 		}
 
 		private void Line2BUT_Click(object sender, EventArgs e)
 		{
-			if (incoc == true && L2Act == false && L2H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L2Act == false && L2H == false)
+				{
+					AwnCall(sender);
+				}
+				else if (L2Act == true && L2H == true)
+				{
+					UHldCll(sender);
+				}
+				else if (L2Act == false && L1Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L2Act == false && L3Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L2Act == false && L4Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L2Act == false && L5Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L2Act == false && L6Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L2Act == true && L2H == true)
-			{
-				//Unhold call
-			}
-			else if (L2Act == false && L1Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L2Act == false && L3Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L2Act == false && L4Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L2Act == false && L5Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L2Act == false && L6Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
+
 		}
 
 		private void Line3BUT_Click(object sender, EventArgs e)
 		{
-			if (incoc == true && L3Act == false && L3H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L3Act == false && L3H == false)
+				{
+					AwnCall(sender);
+				}
+				else if (L3Act == true && L3H == true)
+				{
+					UHldCll(sender);
+				}
+				else if (L3Act == false && L1Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L3Act == false && L2Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L3Act == false && L4Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L3Act == false && L5Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L3Act == false && L6Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L3Act == true && L3H == true)
-			{
-				//Unhold call
-			}
-			else if (L3Act == false && L1Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L3Act == false && L2Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L3Act == false && L4Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L3Act == false && L5Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L3Act == false && L6Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
+
 		}
 
 		private void Line4BUT_Click(object sender, EventArgs e)
 		{
-			if (incoc == true && L4Act == false && L4H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L4Act == false && L4H == false)
+				{
+					AwnCall(sender);
+				}
+				else if (L4Act == true && L4H == true)
+				{
+					UHldCll(sender);
+				}
+				else if (L4Act == false && L1Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L4Act == false && L2Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L4Act == false && L3Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L4Act == false && L5Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L4Act == false && L6Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L4Act == true && L4H == true)
-			{
-				//Unhold call
-			}
-			else if (L4Act == false && L1Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L4Act == false && L2Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L4Act == false && L3Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L4Act == false && L5Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L4Act == false && L6Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
+
 		}
 
 		private void Line5BUT_Click(object sender, EventArgs e)
 		{
-			if (incoc == true && L5Act == false && L5H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L5Act == false && L5H == false)
+				{
+					AwnCall(sender);
+				}
+				else if (L5Act == true && L5H == true)
+				{
+					UHldCll(sender);
+				}
+				else if (L5Act == false && L1Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L5Act == false && L2Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L5Act == false && L3Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L5Act == false && L4Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L5Act == false && L6Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L5Act == true && L5H == true)
-			{
-				//Unhold call
-			}
-			else if (L5Act == false && L1Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L5Act == false && L2Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L5Act == false && L3Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L5Act == false && L4Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L5Act == false && L6Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
+
 		}
 
 		private void Line6BUT_Click(object sender, EventArgs e)
 		{
-			if (incoc == true && L6Act == false && L6H == false)
+			if (CLEANINGSCREEN == false)
 			{
-				AwnCall(sender);
+				if (incoc == true && L6Act == false && L6H == false)
+				{
+					AwnCall(sender);
+				}
+				else if (L6Act == true && L6H == true)
+				{
+					//Unhold call
+				}
+				else if (L6Act == false && L1Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L6Act == false && L2Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L6Act == false && L3Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L6Act == false && L4Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
+				else if (L6Act == false && L5Act == true)
+				{
+					//Hold Other Call
+					//then
+					Archivecallstatus(sender);
+					AwnCall(sender);
+				}
 			}
-			else if (L6Act == true && L6H == true)
-			{
-				//Unhold call
-			}
-			else if (L6Act == false && L1Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L6Act == false && L2Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L6Act == false && L3Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L6Act == false && L4Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
-			else if (L6Act == false && L5Act == true)
-			{
-				//Hold Other Call
-				//then
-				Archivecallstatus(sender);
-				AwnCall(sender);
-			}
+
 		}
 
 		/// <summary>
@@ -2022,30 +2106,36 @@ namespace Tortoise912
 			if (sender == Line1BUT)
 			{
 				client = _sipClients[0];
+				L1H = true;
 				await client.PutOnHold();
 			}
 			else if (sender == Line2BUT)
 			{
+				L2H = true;
 				client = _sipClients[1];
 				await client.PutOnHold();
 			}
 			else if (sender == Line3BUT)
 			{
+				L3H = true;
 				client = _sipClients[2];
 				await client.PutOnHold();
 			}
 			else if (sender == Line4BUT)
 			{
+				L4H = true;
 				client = _sipClients[3];
 				await client.PutOnHold();
 			}
 			else if (sender == Line5BUT)
 			{
+				L5H = true;
 				client = _sipClients[4];
 				await client.PutOnHold();
 			}
 			else if (sender == Line6BUT)
 			{
+				L6H = true;
 				client = _sipClients[5];
 				await client.PutOnHold();
 			}
@@ -2054,26 +2144,32 @@ namespace Tortoise912
 				switch (actline)
 				{
 					case 1:
+						L1H = true;
 						client = _sipClients[0];
 						await client.PutOnHold();
 						break;
 					case 2:
+						L2H = true;
 						client = _sipClients[1];
 						await client.PutOnHold();
 						break;
 					case 3:
+						L3H = true;
 						client = _sipClients[2];
 						await client.PutOnHold();
 						break;
 					case 4:
+						L4H = true;
 						client = _sipClients[3];
 						await client.PutOnHold();
 						break;
 					case 5:
+						L5H = true;
 						client = _sipClients[4];
 						await client.PutOnHold();
 						break;
 					case 6:
+						L6H = true;
 						client = _sipClients[5];
 						await client.PutOnHold();
 						break;
@@ -2090,11 +2186,16 @@ namespace Tortoise912
 		/// <param name="e"></param>
 		private void holdBUT_Click(object sender, EventArgs e)
 		{
-			if (actline != 99) 
+			if (CLEANINGSCREEN == true) { }
+			else
 			{
-				HldCll(sender);
+				if (actline != 99)
+				{
+					HldCll(sender);
+				}
 			}
-			
+
+
 		}
 
 		/// <summary>
@@ -2170,7 +2271,11 @@ namespace Tortoise912
 
 		private void relBUT_Click(object sender, EventArgs e)
 		{
-			byebutton_Click(sender, e);
+			if (CLEANINGSCREEN == false)
+			{
+				byebutton_Click(sender, e);
+			}
+
 		}
 	}
 

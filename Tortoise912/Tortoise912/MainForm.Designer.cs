@@ -64,7 +64,7 @@
 			addrLabel = new Label();
 			cidLabel = new Label();
 			callerbox = new TextBox();
-			button19 = new Button();
+			noteBUT = new Button();
 			button17 = new Button();
 			button16 = new Button();
 			button15 = new Button();
@@ -181,7 +181,7 @@
 			CallInfoPanel.Controls.Add(addrLabel);
 			CallInfoPanel.Controls.Add(cidLabel);
 			CallInfoPanel.Controls.Add(callerbox);
-			CallInfoPanel.Controls.Add(button19);
+			CallInfoPanel.Controls.Add(noteBUT);
 			CallInfoPanel.Controls.Add(button17);
 			CallInfoPanel.Controls.Add(button16);
 			CallInfoPanel.Controls.Add(button15);
@@ -564,15 +564,15 @@
 			callerbox.TabIndex = 23;
 			callerbox.TabStop = false;
 			// 
-			// button19
+			// noteBUT
 			// 
-			button19.Location = new Point(372, 5);
-			button19.Name = "button19";
-			button19.Size = new Size(58, 30);
-			button19.TabIndex = 22;
-			button19.Text = "NOTES";
-			button19.UseVisualStyleBackColor = true;
-			button19.Click += button19_Click;
+			noteBUT.Location = new Point(372, 5);
+			noteBUT.Name = "noteBUT";
+			noteBUT.Size = new Size(58, 30);
+			noteBUT.TabIndex = 22;
+			noteBUT.Text = "NOTES";
+			noteBUT.UseVisualStyleBackColor = true;
+			noteBUT.Click += noteBUT_Click;
 			// 
 			// button17
 			// 
@@ -1410,7 +1410,7 @@
 		private Button button16;
 		private Button button15;
 		private Button button13;
-		private Button button19;
+		private Button noteBUT;
 		private Label cidLabel;
 		private TextBox callerbox;
 		private RichTextBox addrbox;

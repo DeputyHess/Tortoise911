@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
+using Org.BouncyCastle.Asn1.X500;
 using SIPSorcery.SIP;
 using SIPSorcery.SIP.App;
 using SIPSorcery.SoftPhone;
@@ -65,6 +66,7 @@ namespace Tortoise912
 		internal CallsRegStor.L5Call CRS5 = new CallsRegStor.L5Call();
 		internal CallsRegStor.L6Call CRS6 = new CallsRegStor.L6Call();
 		internal int actline = 99;
+		internal int ringingline = 99;
 		internal bool incoc = false;
 
 		/// <summary>
@@ -72,6 +74,9 @@ namespace Tortoise912
 		/// </summary>
 		public System.Windows.Forms.Timer cleantimer = new System.Windows.Forms.Timer();
 
+		/// <summary>
+		/// Ring Timeout Timer
+		/// </summary>
 		public System.Windows.Forms.Timer ringtimeout = new System.Windows.Forms.Timer();
 
 		/// <summary>
@@ -1026,8 +1031,12 @@ namespace Tortoise912
 
 		}
 
+		/// <summary>
+		/// Gen Flash Trig Reset
+		/// </summary>
 		internal void ResetFlashTrigs() 
 		{
+			ringingline = 0;
 			L1FT = false;
 			L2FT = false;
 			L3FT = false;
@@ -1041,6 +1050,56 @@ namespace Tortoise912
 			Line5BUT.BackColor = Color.DarkGray;
 			Line6BUT.BackColor = Color.DarkGray;
 		}
+
+		/// <summary>
+		/// Line Specific
+		/// </summary>
+		internal void ResetFlashTrigs(int L)
+		{
+			ringingline = 0;
+			switch (L) 
+			{
+				case 1:
+					L1FT = false;
+					Line1BUT.BackColor = Color.DarkGray;
+					break;
+				case 2:
+					Line2BUT.BackColor = Color.DarkGray;
+					L2FT = false;
+					break;
+				case 3:
+					L3FT = false;
+					Line3BUT.BackColor = Color.DarkGray;
+					break;
+				case 4:
+					L4FT = false;
+					Line4BUT.BackColor = Color.DarkGray;
+					break;
+				case 5:
+					L5FT = false;
+					Line5BUT.BackColor = Color.DarkGray;
+					break;
+				case 6:
+					L6FT = false;
+					Line6BUT.BackColor = Color.DarkGray;
+					break;
+				default:
+					break;
+			}
+			
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+
 		/// <summary>
 		/// Update Text Box Text
 		/// </summary>
@@ -1094,7 +1153,7 @@ namespace Tortoise912
 			});
 			Invoke((System.Windows.Forms.MethodInvoker)delegate
 			{
-				UpdateTextBox(callerbox, sipRequest.Header.From.FriendlyDescription());
+				UpdateTextBox(callerbox, sipRequest.Header.From.FromURI.ToString());
 			});
 			string tmptpn = sipRequest.Header.CallId;
 			tmptpn = tmptpn.Substring(3, tmptpn.Length - 3);
@@ -1151,26 +1210,32 @@ namespace Tortoise912
 			if (L1Act == false && Line1BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 1;
 			}
 			else if (L2Act == true && Line2BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 2;
 			}
 			else if (L3Act == true && Line3BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 3;
 			}
 			else if (L4Act == true && Line4BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 4;
 			}
 			else if (L5Act == true && Line5BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 5;
 			}
 			else if (L6Act == true && Line6BUT.Visible == true)
 			{
 				L1FT = true;
+				ringingline = 6;
 			}
 			try
 			{
@@ -1233,13 +1298,115 @@ namespace Tortoise912
 		}
 
 		/// <summary>
-		/// Set up the UI to present options for an established SIP call, i.e. hide the cancel 
-		/// button and display they hangup button.
+		/// Pickup the call!
 		/// </summary>
-		private async void SIPCallAnswered(SIPClient client)
+		/// <param name="client"></param>
+		/// <param name="L"></param>
+		private void SIPCallAnswered(SIPClient client)
 		{
+			ringtimeout.Stop();
 
+			CallPickup();
+			Random rng = new Random();
+			string MBT = "";
+			int rn = rng.Next(1, 20);
+			switch (rn) 
+			{
+				case 1:
+					MBT = "AT&T";
+					break;
+				case 2:
+					MBT = "Verizon";
+					break;
+				case 3:
+					MBT = "T-Mobile";
+					break;
+				case 4:
+					MBT = "NexTel";
+					break;
+				case 5:
+					MBT = "NyxTel";
+					break;
+				case 6:
+					MBT = "DSN";
+					break;
+				case 7:
+					MBT = "Bell South";
+					break;
+				case 8:
+					MBT = "Mint";
+					break;
+				case 9:
+					MBT = "Vodafone";
+					break;
+				case 10:
+					MBT = "MegaFon";
+					break;
+				case 11:
+					MBT = "Iridium";
+					break;
+				case 12:
+					MBT = "Inmarsat";
+					break;
+				case 13:
+					MBT = "ACeS";
+					break;
+				case 14:
+					MBT = "Boost Mobile";
+					break;
+				case 15:
+					MBT = "U.S. Cellular";
+					break;
+				case 16:
+					MBT = "Cricket";
+					break;
+				case 17:
+					MBT = "Visible";
+					break;
+				case 18:
+					MBT = "TracFone";
+					break;
+				case 19:
+					MBT = "Movistar";
+					break;
+				case 20:
+					MBT = "Magyar Telekom";
+					break;
+
+			}
+			UpdateTextBox(provideridTXT,MBT);
 			//Gen Addr, Provider, Etc
+		}
+		/// <summary>
+		/// Pickup The Call
+		/// </summary>
+		/// <param name="L"></param>
+		private void CallPickup() 
+		{
+			int L = ringingline;
+			switch (L)
+			{
+				case 1:
+					ResetFlashTrigs(1);
+					break;
+				case 2:
+					ResetFlashTrigs(2);
+					break;
+				case 3:
+					ResetFlashTrigs(3);
+					break;
+				case 4:
+					ResetFlashTrigs(4);
+					break;
+				case 5:
+					ResetFlashTrigs(5);
+					break;
+				case 6:
+					ResetFlashTrigs(6);
+					break;
+				default: break;
+			}
+			ringingline = 0;
 		}
 
 		/// <summary>

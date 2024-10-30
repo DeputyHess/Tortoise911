@@ -2281,21 +2281,32 @@ namespace Tortoise911
 
         private void ALIButton_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection("Data Source=;Initial Catalog=;Persist Security Info=True;User ID=;Password=");
-            conn.Open();
-
-            SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,Zip,ZipPlusFour from [TortiseALI] where name=@zip", conn);
-            command.Parameters.AddWithValue("@LineNum", phNUMTXT.Text);
-            // int result = command.ExecuteNonQuery();
-            using (SqlDataReader reader = command.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                SqlConnection conn = new SqlConnection("Data Source=;Initial Catalog=;Persist Security Info=True;User ID=;Password=");
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,Zip,ZipPlusFour from [TortiseALI] where name=@zip", conn);
+                command.Parameters.AddWithValue("@LineNum", phNUMTXT.Text);
+                // int result = command.ExecuteNonQuery();
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    addrbox.AppendText((string?)reader[0]);
+                    while (reader.Read())
+                    {
+                        addrbox.AppendText((string?)reader[0]);
+                    }
+                    var recordsEffected = reader.RecordsAffected;
                 }
-                var recordsEffected = reader.RecordsAffected;
+                conn.Close();
             }
-            conn.Close();
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    "The attempt to querry the ALI database has failed.",
+                    "ALI Querry Failure",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@
     <StartupObject>Tortoise911.Program</StartupObject>
     <ApplicationIcon>R (21).ico</ApplicationIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <AssemblyName>Tortoise 911</AssemblyName>
     <Title>Tortoise 911</Title>
     <Version>0.69.5</Version>

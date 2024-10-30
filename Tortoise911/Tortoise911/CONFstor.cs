@@ -1,5 +1,6 @@
 ﻿/*
 *   Copyright (C) 2024 by N5UWU
+*   Copyright (C) 2024 by N1JPS
 *   This program is distributed WITHOUT WARRANTY.
 */
 
@@ -163,5 +164,13 @@ namespace Tortoise911
 		internal static string SPW { get; set; }
 
 		internal static string SUS {  get; set; }
-	}
+
+        internal static string MSSQL_IP { get; set; }
+
+        internal static string MSSQL_USER { get; set; }
+
+        internal static string MSSQL_PASS { get; set; }
+
+        internal static string MSSQL_DBN { get; set; }
+    }
 }

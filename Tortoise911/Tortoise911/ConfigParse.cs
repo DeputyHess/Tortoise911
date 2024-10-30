@@ -1,5 +1,6 @@
 ﻿/*
 *   Copyright (C) 2024 by N5UWU
+*   Copyright (C) 2024 by N1JPS
 *   This program is distributed WITHOUT WARRANTY.
 */
 
@@ -944,8 +945,55 @@ namespace Tortoise911
 										File.WriteAllText(@"B:\Tortoise911\Tortoise911\DEBUGCONF\SET.txt", number);
 #endif
 									}
-
-									break;
+                                    if (line.Contains("SET MSSQL_IP") == true)
+                                    {
+                                        if (line.Length > 0)
+                                        {
+                                            number = line.Substring(13, line.Length - 13);
+                                            number = Regex.Replace(number, "[\"]", string.Empty);
+                                            CONFstor.MSSQL_IP = number;
+                                        }
+#if DEBUG
+                                        File.WriteAllText(@"B:\Tortoise911\Tortoise911\DEBUGCONF\SET.txt", number);
+#endif
+                                    }
+                                    if (line.Contains("SET MSSQL_USER") == true)
+                                    {
+                                        if (line.Length > 0)
+                                        {
+                                            number = line.Substring(15, line.Length - 15);
+                                            number = Regex.Replace(number, "[\"]", string.Empty);
+                                            CONFstor.MSSQL_USER = number;
+                                        }
+#if DEBUG
+                                        File.WriteAllText(@"B:\Tortoise911\Tortoise911\DEBUGCONF\SET.txt", number);
+#endif
+                                    }
+                                    if (line.Contains("SET MSSQL_PASS") == true)
+                                    {
+                                        if (line.Length > 0)
+                                        {
+                                            number = line.Substring(15, line.Length - 15);
+                                            number = Regex.Replace(number, "[\"]", string.Empty);
+                                            CONFstor.MSSQL_PASS = number;
+                                        }
+#if DEBUG
+                                        File.WriteAllText(@"B:\Tortoise911\Tortoise911\DEBUGCONF\SET.txt", number);
+#endif
+                                    }
+                                    if (line.Contains("SET MSSQL_DBN") == true)
+                                    {
+                                        if (line.Length > 0)
+                                        {
+                                            number = line.Substring(14, line.Length - 14);
+                                            number = Regex.Replace(number, "[\"]", string.Empty);
+                                            CONFstor.MSSQL_DBN = number;
+                                        }
+#if DEBUG
+                                        File.WriteAllText(@"B:\Tortoise911\Tortoise911\DEBUGCONF\SET.txt", number);
+#endif
+                                    }
+                                    break;
 
 								case "GO":
 

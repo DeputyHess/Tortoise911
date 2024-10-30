@@ -1,5 +1,6 @@
 /*
 *   Copyright (C) 2024 by N5UWU
+*   Copyright (C) 2024 by N1JPS
 *   This program is distributed WITHOUT WARRANTY.
 */
 
@@ -22,6 +23,7 @@ using SIPSorceryMedia.Abstractions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Path = System.IO.Path;
 using System.Data.SqlClient;
+using System.Security;
 
 namespace Tortoise911
 {
@@ -72,11 +74,26 @@ namespace Tortoise911
         internal int actline = 99;
         internal int ringingline = 99;
         internal bool incoc = false;
+        private string SQLIP = CONFstor.MSSQL_IP;
+        private string SQLUSR = CONFstor.MSSQL_USER;
+        private string SQLDB = CONFstor.MSSQL_DBN;
 
         /// <summary>
         /// CleanTimer
         /// </summary>
         public System.Windows.Forms.Timer cleantimer = new System.Windows.Forms.Timer();
+
+        /// <summary>
+        /// Helper to create SQL credenials
+        /// </summary>
+        public void MakeSQLCreds()
+        {
+            SecureString SQLSecPass = new SecureString();
+            string SQLPASS = CONFstor.MSSQL_PASS;
+            SQLPASS.ToCharArray().ToList().ForEach(c => SQLSecPass.AppendChar(c));
+            SQLSecPass.MakeReadOnly();
+            SqlCredential SQLCreds = new SqlCredential(SQLUSR, SQLSecPass);
+        }
 
         /// <summary>
         /// Ring Timeout Timer
@@ -2283,11 +2300,11 @@ namespace Tortoise911
         {
             try
             {
-                SqlConnection conn = new SqlConnection("Data Source=;Initial Catalog=;Persist Security Info=True;User ID=;Password=");
+                SqlConnection conn = new SqlConnection("Data Source=SQLIP;Network Library = DBMSSOCN; Initial Catalog=SQLDB;Integrated Security=false;Persist Security Info=True;User ID=SQLUSR;Password=SQLCreds");
                 conn.Open();
 
-                SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,Zip,ZipPlusFour from [TortiseALI] where name=@zip", conn);
-                command.Parameters.AddWithValue("@LineNum", phNUMTXT.Text);
+                SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,ZipCode,ZipPlusFour from [TortiseALI] where LineNum=@CallerNumber", conn);
+                command.Parameters.AddWithValue("@CallerNumber", phNUMTXT.Text);
                 // int result = command.ExecuteNonQuery();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

@@ -6,9 +6,9 @@ GO
 USE Tortoise911;
 
 CREATE TABLE TortoiseALI (
-    LineNumber int,
-    StreetNumber int,
-    Street Direction varchar(255),
+    LineNum int,
+    StreetNum int,
+    StreetDir varchar(255),
     StreetName varchar(255),
     StreetSuffix varchar(255),
     City varchar(255),

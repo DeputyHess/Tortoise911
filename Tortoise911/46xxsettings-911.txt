@@ -1,6 +1,6 @@
 ####Yes its the Aura Prov file, I use an Aura PBX and I want to just have one auto provisioning source..
 
-SET SIP_CONTROLLER_LIST 172.25.0.106:5060;transport=tcp
+SET SIP_CONTROLLER_LIST 10.200.0.20:5060;transport=tcp
 SET SIPSIGNAL 1
 SET WAIT_FOR_REGISTRATION_TIMER 40
 
@@ -56,7 +56,7 @@ SET XF4_NUMB #101999
 SET XF8_NUMB #101999
 
 # ALI Setup
-MSSQL_IP 10.0.0.50
+MSSQL_IP 10.200.0.32
 MSSQL_USER sa
 MSSQL_PASS Slowsky123
 MSSQL_DBN Tortoise911

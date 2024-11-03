@@ -40,6 +40,12 @@
 			label3 = new Label();
 			provgrpTXT = new TextBox();
 			saveBUT = new Button();
+			relkeydrop = new ComboBox();
+			awnkeydrop = new ComboBox();
+			relkeylab = new Label();
+			awnkeylab = new Label();
+			ringtonelab = new Label();
+			ringtoneDROP = new ComboBox();
 			SuspendLayout();
 			// 
 			// headsetdrop
@@ -96,7 +102,7 @@
 			// colour
 			// 
 			colour.AutoSize = true;
-			colour.Location = new Point(119, 259);
+			colour.Location = new Point(119, 399);
 			colour.Name = "colour";
 			colour.Size = new Size(43, 15);
 			colour.TabIndex = 7;
@@ -106,7 +112,7 @@
 			// 
 			colorLIST.FormattingEnabled = true;
 			colorLIST.Items.AddRange(new object[] { "Grey", "Black", "Blue", "Red", "Purple" });
-			colorLIST.Location = new Point(53, 277);
+			colorLIST.Location = new Point(53, 417);
 			colorLIST.Name = "colorLIST";
 			colorLIST.Size = new Size(172, 23);
 			colorLIST.TabIndex = 6;
@@ -130,7 +136,7 @@
 			// 
 			// saveBUT
 			// 
-			saveBUT.Location = new Point(108, 313);
+			saveBUT.Location = new Point(108, 453);
 			saveBUT.Name = "saveBUT";
 			saveBUT.Size = new Size(75, 23);
 			saveBUT.TabIndex = 10;
@@ -138,11 +144,71 @@
 			saveBUT.UseVisualStyleBackColor = true;
 			saveBUT.Click += saveBUT_Click;
 			// 
+			// relkeydrop
+			// 
+			relkeydrop.FormattingEnabled = true;
+			relkeydrop.Items.AddRange(new object[] { "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18", "F19", "F20" });
+			relkeydrop.Location = new Point(96, 274);
+			relkeydrop.Name = "relkeydrop";
+			relkeydrop.Size = new Size(109, 23);
+			relkeydrop.TabIndex = 11;
+			// 
+			// awnkeydrop
+			// 
+			awnkeydrop.FormattingEnabled = true;
+			awnkeydrop.Items.AddRange(new object[] { "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18", "F19", "F20" });
+			awnkeydrop.Location = new Point(96, 325);
+			awnkeydrop.Name = "awnkeydrop";
+			awnkeydrop.Size = new Size(109, 23);
+			awnkeydrop.TabIndex = 12;
+			// 
+			// relkeylab
+			// 
+			relkeylab.AutoSize = true;
+			relkeylab.Location = new Point(119, 256);
+			relkeylab.Name = "relkeylab";
+			relkeylab.Size = new Size(68, 15);
+			relkeylab.TabIndex = 13;
+			relkeylab.Text = "Release Key";
+			// 
+			// awnkeylab
+			// 
+			awnkeylab.AutoSize = true;
+			awnkeylab.Location = new Point(115, 307);
+			awnkeylab.Name = "awnkeylab";
+			awnkeylab.Size = new Size(68, 15);
+			awnkeylab.TabIndex = 14;
+			awnkeylab.Text = "Answer Key";
+			// 
+			// ringtonelab
+			// 
+			ringtonelab.AutoSize = true;
+			ringtonelab.Location = new Point(115, 354);
+			ringtonelab.Name = "ringtonelab";
+			ringtonelab.Size = new Size(55, 15);
+			ringtonelab.TabIndex = 16;
+			ringtonelab.Text = "Ringtone";
+			// 
+			// ringtoneDROP
+			// 
+			ringtoneDROP.FormattingEnabled = true;
+			ringtoneDROP.Items.AddRange(new object[] { "1", "2", "3", "4", "5" });
+			ringtoneDROP.Location = new Point(96, 372);
+			ringtoneDROP.Name = "ringtoneDROP";
+			ringtoneDROP.Size = new Size(109, 23);
+			ringtoneDROP.TabIndex = 15;
+			// 
 			// configform
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(282, 348);
+			ClientSize = new Size(282, 496);
+			Controls.Add(ringtonelab);
+			Controls.Add(ringtoneDROP);
+			Controls.Add(awnkeylab);
+			Controls.Add(relkeylab);
+			Controls.Add(awnkeydrop);
+			Controls.Add(relkeydrop);
 			Controls.Add(saveBUT);
 			Controls.Add(label3);
 			Controls.Add(provgrpTXT);
@@ -175,5 +241,11 @@
 		private Label label3;
 		private TextBox provgrpTXT;
 		private Button saveBUT;
+		private ComboBox relkeydrop;
+		private ComboBox awnkeydrop;
+		private Label relkeylab;
+		private Label awnkeylab;
+		private Label ringtonelab;
+		private ComboBox ringtoneDROP;
 	}
 }

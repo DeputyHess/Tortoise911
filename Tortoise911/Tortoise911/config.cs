@@ -3,17 +3,6 @@
 *   This program is distributed WITHOUT WARRANTY.
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Tortoise911
 {
 	public partial class configform : Form
@@ -34,6 +23,8 @@ namespace Tortoise911
 				{
 					provgrpTXT.Text = CFB.Provgrp;
 				}
+				if (CFB.AwnKey != null) { awnkeydrop.Text = CFB.AwnKey; }
+				if(CFB.RelKey != null) { relkeydrop.Text = CFB.RelKey; }
 			}
 			catch (Exception ex)
 			{
@@ -48,6 +39,8 @@ namespace Tortoise911
 				ConfigFileBullshit CFB = new ConfigFileBullshit();
 				CFB.Provurl= provTXT.Text;
 				CFB.Provgrp = provgrpTXT.Text;
+				CFB.AwnKey=awnkeydrop.Text;
+				CFB.RelKey=relkeydrop.Text;
 				CFB.setconf();
 			}
 			catch (Exception ex)

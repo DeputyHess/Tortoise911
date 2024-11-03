@@ -974,6 +974,27 @@ namespace Tortoise911
 					Line1BUT.BackColor = Color.DarkGray;
 				}
 			}
+			switch (actline) 
+			{
+				case 1:
+					Line1BUT.BackColor = Color.Green;
+					break;
+				case 2:
+					Line2BUT.BackColor = Color.Green;
+					break;
+				case 3:
+					Line3BUT.BackColor = Color.Green;
+					break;
+				case 4:
+					Line4BUT.BackColor = Color.Green;
+					break;
+				case 5:
+					Line5BUT.BackColor = Color.Green;
+					break;
+				case 6:
+					Line6BUT.BackColor = Color.Green;
+					break;
+			}
 		}
 
 		/// <summary>
@@ -1577,26 +1598,38 @@ namespace Tortoise911
 				case 1:
 					client = _sipClients[0];
 					L1H = false;
+					L1Act = false;
+					actline = 99;
 					break;
 				case 2:
 					client = _sipClients[1];
 					L2H = false;
+					L2Act = false;
+					actline = 99;
 					break;
 				case 3:
 					client = _sipClients[2];
 					L3H = false;
+					L3Act = false;
+					actline = 99;
 					break;
 				case 4:
 					client = _sipClients[3];
 					L4H = false;
+					L4Act = false;
+					actline = 99;
 					break;
 				case 5:
 					client = _sipClients[4];
 					L5H = false;
+					L5Act = false;
+					actline = 99;
 					break;
 				case 6:
 					client = _sipClients[5];
 					L6H = false;
+					L6Act = false;
+					actline = 99;
 					break;
 				default:
 					FAFO = true;
@@ -2527,7 +2560,7 @@ namespace Tortoise911
 					RELKEY = Keys.F20;
 					break;
 				default:
-					RELKEY=Keys.F16;
+					RELKEY=Keys.F20;
 					break;
 			}
 
@@ -2594,7 +2627,7 @@ namespace Tortoise911
 					AWNKEY = Keys.F20;
 					break;
 				default:
-					RELKEY = Keys.F20;
+					AWNKEY = Keys.F16;
 					break;
 			}
 

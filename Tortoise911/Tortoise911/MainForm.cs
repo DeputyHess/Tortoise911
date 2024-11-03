@@ -2461,8 +2461,8 @@ namespace Tortoise911
 		{
 			ConfigFileBullshit cfb = new ConfigFileBullshit();
 			cfb.getconf();
-			var RELKEY;
-			var AWNKEY;
+			var RELKEY=Keys.F20;
+			var AWNKEY= Keys.F16;
 
 			switch (cfb.RelKey) 
 			{

@@ -11,28 +11,44 @@ namespace Tortoise911
 	{
 		internal string Provurl { get; set; }
 		internal string Provgrp { get; set; }
+		internal string Rngtne { get; set; }
+		internal string RelKey { get; set; }
+		internal string AwnKey { get; set; }
 		internal void setconf() 
 		{
-			string[] line = new string[3];
+			string[] line = new string[6];
 			line [0] = "NYXTEL TORTOISE 911 INIT CFG";
 			line [1] = Provurl;
-			line[2] = Provgrp;
+			line [2] = Provgrp;
+			line [3] = Rngtne;
+			line [4] = RelKey;
+			line [5] = AwnKey;
 			try
 			{
-				File.WriteAllLines(@"C:\NyxTel\config.nxt", line);
+				File.WriteAllLines(@"C:\ProgramData\NyxTel\config.nxt", line);
 			}
 			catch (Exception ex) 
 			{
-				System.IO.Directory.CreateDirectory(@"C:\NyxTel\");
-				File.WriteAllLines(@"C:\NyxTel\config.nxt", line);
+				System.IO.Directory.CreateDirectory(@"C:\ProgramData\NyxTel\");
+				File.WriteAllLines(@"C:\ProgramData\NyxTel\config.nxt", line);
 			}
 		}
 
 		internal void getconf() 
 		{
-			string[] cfgshit = File.ReadAllLines(@"C:\NyxTel\config.nxt");
-			Provurl = cfgshit[1];
-			Provgrp = cfgshit[2];
+			try
+			{
+				string[] cfgshit = File.ReadAllLines(@"C:\ProgramData\NyxTel\config.nxt");
+				Provurl = cfgshit[1];
+				Provgrp = cfgshit[2];
+				Rngtne = cfgshit[3];
+				RelKey = cfgshit[4];
+				AwnKey = cfgshit[5];
+			}
+			catch (Exception ex)
+			{
+				
+			}
 		}
 	}
 }

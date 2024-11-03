@@ -837,30 +837,133 @@ namespace Tortoise911
 			{
 				if (Line2BUT.BackColor == Color.Red) { Line2BUT.BackColor = Color.Blue; }
 				else { Line2BUT.BackColor = Color.Red; }
+				if (varstore.cunt == 7 || varstore.cunt == 0)
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
+
+				varstore.cunt++;
 			}
 			else if (L3FT == true)
 			{
 				if (Line3BUT.BackColor == Color.Red) { Line3BUT.BackColor = Color.Blue; }
 				else { Line3BUT.BackColor = Color.Red; }
+				if (varstore.cunt == 7 || varstore.cunt == 0)
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
+
+				varstore.cunt++;
 			}
 			else if (L4FT == true)
 			{
 				if (Line4BUT.BackColor == Color.Red) { Line4BUT.BackColor = Color.Blue; }
 				else { Line4BUT.BackColor = Color.Red; }
+				if (varstore.cunt == 7 || varstore.cunt == 0)
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
+
+				varstore.cunt++;
 			}
 			else if (L5FT == true)
 			{
 				if (Line5BUT.BackColor == Color.Red) { Line5BUT.BackColor = Color.Blue; }
 				else { Line5BUT.BackColor = Color.Red; }
+				if (varstore.cunt == 7 || varstore.cunt == 0)
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
+
+				varstore.cunt++;
 			}
 			else if (L6FT == true)
 			{
 				if (Line6BUT.BackColor == Color.Red) { Line6BUT.BackColor = Color.Blue; }
 				else { Line6BUT.BackColor = Color.Red; }
-			}
+				if (varstore.cunt == 7 || varstore.cunt == 0)
+				{
+					using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\ringtone.wav"))
+					{
+						player.Play();
+					}
+					varstore.cunt = 1;
+				}
 
-			//TODO: Add other Lines to this
+				varstore.cunt++;
+			}
 			if (L1H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
+			}
+			if (L2H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
+			}
+			if (L3H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
+			}
+			if (L4H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
+			}
+			if (L5H == true)
+			{
+				if (DateTime.Now.Second % 5 == 0)
+				{
+					Line1BUT.BackColor = Color.Aqua;
+				}
+				else
+				{
+					Line1BUT.BackColor = Color.DarkGray;
+				}
+			}
+			if (L6H == true)
 			{
 				if (DateTime.Now.Second % 5 == 0)
 				{
@@ -1138,18 +1241,6 @@ namespace Tortoise911
 				default:
 					break;
 			}
-
-
-
-
-
-
-
-
-
-
-
-
 		}
 
 		/// <summary>
@@ -2368,13 +2459,152 @@ namespace Tortoise911
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.F16)
+			ConfigFileBullshit cfb = new ConfigFileBullshit();
+			cfb.getconf();
+			var RELKEY;
+			var AWNKEY;
+
+			switch (cfb.RelKey) 
+			{
+				case"F1":
+					RELKEY = Keys.F1;
+					break;
+				case "F2":
+					RELKEY = Keys.F2;
+					break;
+				case "F3":
+					RELKEY = Keys.F3;
+					break;
+				case "F4":
+					RELKEY = Keys.F4;
+					break;
+				case "F5":
+					RELKEY = Keys.F5;
+					break;
+				case "F6":
+					RELKEY = Keys.F6;
+					break;
+				case "F7":
+					RELKEY = Keys.F7;
+					break;
+				case "F8":
+					RELKEY = Keys.F8;
+					break;
+				case "F9":
+					RELKEY = Keys.F9;
+					break;
+				case "F10":
+					RELKEY = Keys.F10;
+					break;
+				case "F11":
+					RELKEY = Keys.F11;
+					break;
+				case "F12":
+					RELKEY = Keys.F12;
+					break;
+				case "F13":
+					RELKEY = Keys.F13;
+					break;
+				case "F14":
+					RELKEY = Keys.F14;
+					break;
+				case "F15":
+					RELKEY = Keys.F15;
+					break;
+				case "F16":
+					RELKEY = Keys.F16;
+					break;
+				case "F17":
+					RELKEY = Keys.F17;
+					break;
+				case "F18":
+					RELKEY = Keys.F18;
+					break;
+				case "F19":
+					RELKEY = Keys.F19;
+					break;
+				case "F20":
+					RELKEY = Keys.F20;
+					break;
+				default:
+					RELKEY=Keys.F16;
+					break;
+			}
+
+			switch (cfb.AwnKey)
+			{
+				case "F1":
+					AWNKEY = Keys.F1;
+					break;
+				case "F2":
+					AWNKEY = Keys.F2;
+					break;
+				case "F3":
+					AWNKEY = Keys.F3;
+					break;
+				case "F4":
+					AWNKEY = Keys.F4;
+					break;
+				case "F5":
+					AWNKEY = Keys.F5;
+					break;
+				case "F6":
+					AWNKEY = Keys.F6;
+					break;
+				case "F7":
+					AWNKEY = Keys.F7;
+					break;
+				case "F8":
+					AWNKEY = Keys.F8;
+					break;
+				case "F9":
+					AWNKEY = Keys.F9;
+					break;
+				case "F10":
+					AWNKEY = Keys.F10;
+					break;
+				case "F11":
+					AWNKEY = Keys.F11;
+					break;
+				case "F12":
+					AWNKEY = Keys.F12;
+					break;
+				case "F13":
+					AWNKEY = Keys.F13;
+					break;
+				case "F14":
+					AWNKEY = Keys.F14;
+					break;
+				case "F15":
+					AWNKEY = Keys.F15;
+					break;
+				case "F16":
+					AWNKEY = Keys.F16;
+					break;
+				case "F17":
+					AWNKEY = Keys.F17;
+					break;
+				case "F18":
+					AWNKEY = Keys.F18;
+					break;
+				case "F19":
+					AWNKEY = Keys.F19;
+					break;
+				case "F20":
+					AWNKEY = Keys.F20;
+					break;
+				default:
+					RELKEY = Keys.F20;
+					break;
+			}
+
+			if (e.KeyCode == AWNKEY)
 			{
 				AwnCall(sender);
 				//Answer
 				e.SuppressKeyPress = true;
 			}
-			else if (e.KeyCode== Keys.F20) 
+			else if (e.KeyCode== RELKEY) 
 			{
 				HngUpCall(sender);
 				//Release

@@ -974,7 +974,7 @@ namespace Tortoise911
 					Line1BUT.BackColor = Color.DarkGray;
 				}
 			}
-			switch (actline) 
+			switch (actline)
 			{
 				case 1:
 					Line1BUT.BackColor = Color.Green;
@@ -1002,7 +1002,7 @@ namespace Tortoise911
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void conftimer_Tick(object sender, EventArgs e)
+		private void conftimer_Tick(object sender, EventArgs e)
 		{
 			try
 			{
@@ -1687,39 +1687,39 @@ namespace Tortoise911
 				actline = 6;
 				L6Act = true;
 			}
-			if (sender == this) 
+			if (sender == this)
 			{
-				if (L1Act == false) 
+				if (L1Act == false)
 				{
 					client = _sipClients[0];
 					actline = 1;
 					L1Act = true;
 				}
-				else if(L2Act == false) 
+				else if (L2Act == false)
 				{
 					client = _sipClients[1];
 					actline = 2;
 					L2Act = true;
 				}
-				else if (L3Act == false) 
+				else if (L3Act == false)
 				{
 					client = _sipClients[2];
 					actline = 3;
 					L3Act = true;
 				}
-				else if (L4Act == false) 
+				else if (L4Act == false)
 				{
 					client = _sipClients[3];
 					actline = 4;
 					L4Act = true;
 				}
-				else if (L5Act == false) 
+				else if (L5Act == false)
 				{
 					client = _sipClients[4];
 					actline = 5;
 					L5Act = true;
 				}
-				else if (L6Act == false) 
+				else if (L6Act == false)
 				{
 					client = _sipClients[5];
 					actline = 6;
@@ -2494,12 +2494,12 @@ namespace Tortoise911
 		{
 			ConfigFileBullshit cfb = new ConfigFileBullshit();
 			cfb.getconf();
-			var RELKEY=Keys.F20;
-			var AWNKEY= Keys.F16;
+			var RELKEY = Keys.F20;
+			var AWNKEY = Keys.F16;
 
-			switch (cfb.RelKey) 
+			switch (cfb.RelKey)
 			{
-				case"F1":
+				case "F1":
 					RELKEY = Keys.F1;
 					break;
 				case "F2":
@@ -2560,7 +2560,7 @@ namespace Tortoise911
 					RELKEY = Keys.F20;
 					break;
 				default:
-					RELKEY=Keys.F20;
+					RELKEY = Keys.F20;
 					break;
 			}
 
@@ -2637,11 +2637,140 @@ namespace Tortoise911
 				//Answer
 				e.SuppressKeyPress = true;
 			}
-			else if (e.KeyCode== RELKEY) 
+			else if (e.KeyCode == RELKEY)
 			{
 				HngUpCall(sender);
 				//Release
 				e.SuppressKeyPress = true;
+			}
+		}
+		private async void xfer(object sender,string dest) 
+		{
+			var client = _sipClients[0];
+			switch (actline)
+			{
+				case 1:
+					client = _sipClients[0];
+					break;
+				case 2:
+					client = _sipClients[1];
+					break;
+				case 3:
+					client = _sipClients[2];
+					break;
+				case 4:
+					client = _sipClients[3];
+					break;
+				case 5:
+					client = _sipClients[4];
+					break;
+				case 6:
+					client = _sipClients[5];
+					break;
+			}
+			
+			bool wasAccepted = await client.BlindTransfer(dest);
+			if (wasAccepted)
+			{
+				ResetToCallStartState(client);
+				switch (actline)
+				{
+					case 1:
+						L1H = false;
+						L1Act = false;
+						actline = 99;
+						break;
+					case 2:
+						L2H = false;
+						L2Act = false;
+						actline = 99;
+						break;
+					case 3:
+						L3H = false;
+						L3Act = false;
+						actline = 99;
+						break;
+					case 4:
+						L4H = false;
+						L4Act = false;
+						actline = 99;
+						break;
+					case 5:
+						L5H = false;
+						L5Act = false;
+						actline = 99;
+						break;
+					case 6:
+						L6H = false;
+						L6Act = false;
+						actline = 99;
+						break;
+				}
+			}
+			else
+			{
+				System.Media.SystemSounds.Question.Play();
+			}
+		}
+		private void xfer1BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF1_NUMB);
+
+			}
+		}
+
+		private void xfer2BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF2_NUMB);
+
+			}
+		}
+
+		private void xfer3BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF3_NUMB);
+
+			}
+		}
+
+		private void xfer4BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false)
+			{
+				xfer(sender, CONFstor.XF4_NUMB);
+			}
+		}
+
+		private void xfer5BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF5_NUMB);
+
+			}
+		}
+
+		private void xfer6BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF6_NUMB);
+			}
+		}
+
+		private void xfer7BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false) {
+				xfer(sender, CONFstor.XF7_NUMB);
+			}
+		}
+
+		private void xfer8BUT_Click(object sender, EventArgs e)
+		{
+			if (CLEANINGSCREEN == false)
+			{
+				xfer(sender, CONFstor.XF8_NUMB);
 			}
 		}
 	}

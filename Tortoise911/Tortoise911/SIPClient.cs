@@ -293,13 +293,16 @@ namespace SIPSorcery.SoftPhone
         /// <returns>A new media session object.</returns>
         private VoIPMediaSession CreateMediaSession()
         {
-            var windowsAudioEndPoint = new WindowsAudioEndPoint(new AudioEncoder(), m_audioOutDeviceIndex);
-            var windowsVideoEndPoint = new WindowsVideoEndPoint(new VpxVideoEncoder());
+            ConfigFileBullshit CFB = new ConfigFileBullshit();
+            CFB.getconf();
+            var windowsAudioEndPoint = new WindowsAudioEndPoint(new AudioEncoder(), CFB.aout);
+			var windowsAudioOrgPoint = new WindowsAudioEndPoint(new AudioEncoder(), CFB.ain);
+			var windowsVideoEndPoint = new WindowsVideoEndPoint(new VpxVideoEncoder());
 
             MediaEndPoints mediaEndPoints = new MediaEndPoints
             {
                 AudioSink = windowsAudioEndPoint,
-                AudioSource = windowsAudioEndPoint,
+                AudioSource = windowsAudioOrgPoint,
                 // TODO: Not working for calls to sip:music@iptel.org. AC 29 Sep 2024.
                 //VideoSink = windowsVideoEndPoint,
                 //VideoSource = windowsVideoEndPoint,

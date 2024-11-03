@@ -1243,6 +1243,7 @@
 			xfer1BUT.TabIndex = 69;
 			xfer1BUT.Text = "XFER 1";
 			xfer1BUT.UseVisualStyleBackColor = true;
+			xfer1BUT.Click += xfer1BUT_Click;
 			// 
 			// xfer2BUT
 			// 
@@ -1253,6 +1254,7 @@
 			xfer2BUT.TabIndex = 70;
 			xfer2BUT.Text = "XFER 2";
 			xfer2BUT.UseVisualStyleBackColor = true;
+			xfer2BUT.Click += xfer2BUT_Click;
 			// 
 			// xfer3BUT
 			// 
@@ -1263,6 +1265,7 @@
 			xfer3BUT.TabIndex = 71;
 			xfer3BUT.Text = "XFER 3";
 			xfer3BUT.UseVisualStyleBackColor = true;
+			xfer3BUT.Click += xfer3BUT_Click;
 			// 
 			// xfer4BUT
 			// 
@@ -1273,6 +1276,7 @@
 			xfer4BUT.TabIndex = 72;
 			xfer4BUT.Text = "XFER 4";
 			xfer4BUT.UseVisualStyleBackColor = true;
+			xfer4BUT.Click += xfer4BUT_Click;
 			// 
 			// xfer5BUT
 			// 
@@ -1283,6 +1287,7 @@
 			xfer5BUT.TabIndex = 73;
 			xfer5BUT.Text = "XFER 5";
 			xfer5BUT.UseVisualStyleBackColor = true;
+			xfer5BUT.Click += xfer5BUT_Click;
 			// 
 			// xfer6BUT
 			// 
@@ -1293,6 +1298,7 @@
 			xfer6BUT.TabIndex = 74;
 			xfer6BUT.Text = "XFER 6";
 			xfer6BUT.UseVisualStyleBackColor = true;
+			xfer6BUT.Click += xfer6BUT_Click;
 			// 
 			// xfer7BUT
 			// 
@@ -1303,6 +1309,7 @@
 			xfer7BUT.TabIndex = 75;
 			xfer7BUT.Text = "XFER 7";
 			xfer7BUT.UseVisualStyleBackColor = true;
+			xfer7BUT.Click += xfer7BUT_Click;
 			// 
 			// xfer8BUT
 			// 
@@ -1313,6 +1320,7 @@
 			xfer8BUT.TabIndex = 76;
 			xfer8BUT.Text = "XFER 8";
 			xfer8BUT.UseVisualStyleBackColor = true;
+			xfer8BUT.Click += xfer8BUT_Click;
 			// 
 			// cleanBANNER
 			// 

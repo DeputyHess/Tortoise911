@@ -2,6 +2,8 @@
 *   Copyright (C) 2024 by N5UWU
 *   This program is distributed WITHOUT WARRANTY.
 */
+using Security;
+using System.Text;
 
 namespace Tortoise911
 {
@@ -33,7 +35,7 @@ namespace Tortoise911
 					int rcod = 0;
 					rcod = Siphandle.SippyPWCheck(Siphandle.sipTransport, usernameBOX.Text, passwordBOX.Text, Application.UserAppDataRegistry.GetValue("SIPSV").ToString());
 
-					switch (rcod) 
+					switch (rcod)
 					{
 						case 0:
 							grant = true;
@@ -91,7 +93,7 @@ namespace Tortoise911
 #else
 					ConfigFileBullshit CFB = new ConfigFileBullshit();
 					CFB.getconf();
-					if (CFB.DBGLGN == "DaU2sceJBj3x4ZJ0BO8VFYSHAsQRhCcw")
+					if (CFB.DBGLGN == FingerPrint.CreateMD5(FingerPrint.GetMachineGuid() + "5125302242"))
 					{
 						MessageBox.Show("No Server Has Been Setup. Granting Debug Login ");
 						varstore.tauth = true;
@@ -111,6 +113,12 @@ namespace Tortoise911
 		private void OperatorLogin_Shown(object sender, EventArgs e)
 		{
 			button1.Text = "Login";
+			uidlab.Text = FingerPrint.GetMachineGuid();
+		}
+
+		private void passwordBOX_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter) { button1_Click(sender,e); }
 		}
 	}
 }

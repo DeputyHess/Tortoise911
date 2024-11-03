@@ -38,6 +38,7 @@
 			label4 = new Label();
 			button1 = new Button();
 			button2 = new Button();
+			uidlab = new Label();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
 			SuspendLayout();
 			// 
@@ -57,7 +58,7 @@
 			label1.Font = new Font("Comic Sans MS", 30F);
 			label1.Location = new Point(18, 140);
 			label1.Name = "label1";
-			label1.Size = new Size(261, 56);
+			label1.Size = new Size(255, 56);
 			label1.TabIndex = 1;
 			label1.Text = "Tortoise 911";
 			// 
@@ -87,6 +88,7 @@
 			passwordBOX.Size = new Size(189, 23);
 			passwordBOX.TabIndex = 4;
 			passwordBOX.UseSystemPasswordChar = true;
+			passwordBOX.KeyDown += passwordBOX_KeyDown;
 			// 
 			// label3
 			// 
@@ -129,11 +131,22 @@
 			button2.UseVisualStyleBackColor = false;
 			button2.Click += button2_Click;
 			// 
+			// uidlab
+			// 
+			uidlab.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			uidlab.AutoSize = true;
+			uidlab.Location = new Point(-1, 483);
+			uidlab.Name = "uidlab";
+			uidlab.Size = new Size(27, 15);
+			uidlab.TabIndex = 9;
+			uidlab.Text = "ERR";
+			// 
 			// OperatorLogin
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(294, 498);
+			Controls.Add(uidlab);
 			Controls.Add(button2);
 			Controls.Add(button1);
 			Controls.Add(label4);
@@ -165,5 +178,6 @@
 		private Label label4;
 		private Button button1;
 		private Button button2;
+		private Label uidlab;
 	}
 }

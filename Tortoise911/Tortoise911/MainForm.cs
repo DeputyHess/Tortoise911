@@ -816,6 +816,27 @@ namespace Tortoise911
 		{
 			timeLAB.Text = DateTime.Now.ToString("HH:MM:ss");
 			dateLAB.Text = DateTime.Now.ToString("MM/dd/yyyy");
+			switch (actline)
+			{
+				case 1:
+					Line1BUT.BackColor = Color.Green;
+					break;
+				case 2:
+					Line2BUT.BackColor = Color.Green;
+					break;
+				case 3:
+					Line3BUT.BackColor = Color.Green;
+					break;
+				case 4:
+					Line4BUT.BackColor = Color.Green;
+					break;
+				case 5:
+					Line5BUT.BackColor = Color.Green;
+					break;
+				case 6:
+					Line6BUT.BackColor = Color.Green;
+					break;
+			}
 			if (L1FT == true)
 			{
 				if (Line1BUT.BackColor == Color.Red) { Line1BUT.BackColor = Color.Blue; }
@@ -974,27 +995,7 @@ namespace Tortoise911
 					Line1BUT.BackColor = Color.DarkGray;
 				}
 			}
-			switch (actline)
-			{
-				case 1:
-					Line1BUT.BackColor = Color.Green;
-					break;
-				case 2:
-					Line2BUT.BackColor = Color.Green;
-					break;
-				case 3:
-					Line3BUT.BackColor = Color.Green;
-					break;
-				case 4:
-					Line4BUT.BackColor = Color.Green;
-					break;
-				case 5:
-					Line5BUT.BackColor = Color.Green;
-					break;
-				case 6:
-					Line6BUT.BackColor = Color.Green;
-					break;
-			}
+			
 		}
 
 		/// <summary>
@@ -1773,10 +1774,6 @@ namespace Tortoise911
 					AwnCall(sender);
 					L1Act = true;
 				}
-				else if (L1Act == true && L1H == true)
-				{
-					UHldCll(sender);
-				}
 				else if (L1Act == false && L2Act == true)
 				{
 					//Hold Other Call
@@ -1811,6 +1808,10 @@ namespace Tortoise911
 					//then
 					Archivecallstatus(sender);
 					AwnCall(sender);
+				}
+				else if (L1Act == false && L1H == true)
+				{
+					UHldCll(sender);
 				}
 			}
 		}
@@ -2373,7 +2374,33 @@ namespace Tortoise911
 			{
 				if (actline != 99)
 				{
-					HldCll(sender);
+					switch (actline) 
+					{
+						case 1:
+							if (L1H == true) { UHldCll(sender); L1H = false; }
+							else { HldCll(sender); L1H = true; }
+							break; 
+						case 2:
+							if (L2H == true) { UHldCll(sender); L2H = false; }
+							else { HldCll(sender); L2H = true; }
+							break;
+						case 3:
+							if (L3H == true) { UHldCll(sender); L3H = false; }
+							else { HldCll(sender); L3H = true; }
+							break;
+						case 4:
+							if (L4H == true) { UHldCll(sender); L4H = false; }
+							else { HldCll(sender); L4H = true; }
+							break;
+						case 5:
+							if (L5H == true) { UHldCll(sender); L5H = false; }
+							else { HldCll(sender); L5H = true; }
+							break;
+						case 6:
+							if (L6H == true) { UHldCll(sender); L6H = false; }
+							else { HldCll(sender); L6H = true; }
+							break;
+					}
 				}
 			}
 
@@ -2462,31 +2489,34 @@ namespace Tortoise911
 
 		private void ALIButton_Click(object sender, EventArgs e)
 		{
-			try
+			if (CLEANINGSCREEN == false)
 			{
-				SqlConnection conn = new SqlConnection("Data Source=SQLIP;Network Library = DBMSSOCN; Initial Catalog=SQLDB;Integrated Security=false;Persist Security Info=True;User ID=SQLUSR;Password=SQLCreds");
-				conn.Open();
-
-				SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,ZipCode,ZipPlusFour from [TortiseALI] where LineNum=@CallerNumber", conn);
-				command.Parameters.AddWithValue("@CallerNumber", phNUMTXT.Text);
-				// int result = command.ExecuteNonQuery();
-				using (SqlDataReader reader = command.ExecuteReader())
+				try
 				{
-					while (reader.Read())
+					SqlConnection conn = new SqlConnection("Data Source=SQLIP;Network Library = DBMSSOCN; Initial Catalog=SQLDB;Integrated Security=false;Persist Security Info=True;User ID=SQLUSR;Password=SQLCreds");
+					conn.Open();
+
+					SqlCommand command = new SqlCommand("Select StreetDir, StreetNum,StreetName,StreetSuffix,City,ZipCode,ZipPlusFour from [TortiseALI] where LineNum=@CallerNumber", conn);
+					command.Parameters.AddWithValue("@CallerNumber", phNUMTXT.Text);
+					// int result = command.ExecuteNonQuery();
+					using (SqlDataReader reader = command.ExecuteReader())
 					{
-						addrbox.AppendText((string?)reader[0]);
+						while (reader.Read())
+						{
+							addrbox.AppendText((string?)reader[0]);
+						}
+						var recordsEffected = reader.RecordsAffected;
 					}
-					var recordsEffected = reader.RecordsAffected;
+					conn.Close();
 				}
-				conn.Close();
-			}
-			catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show(
-					"The attempt to querry the ALI database has failed.",
-					"ALI Querry Failure",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
+				catch (Exception ex)
+				{
+					System.Windows.Forms.MessageBox.Show(
+						"The attempt to querry the ALI database has failed.",
+						"ALI Querry Failure",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
 			}
 		}
 
@@ -2668,7 +2698,7 @@ namespace Tortoise911
 					client = _sipClients[5];
 					break;
 			}
-			
+			dest = "sip:" + dest + CONFstor.SIPDOMAIN;
 			bool wasAccepted = await client.BlindTransfer(dest);
 			if (wasAccepted)
 			{

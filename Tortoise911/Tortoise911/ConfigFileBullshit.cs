@@ -14,6 +14,7 @@ namespace Tortoise911
 		internal string Rngtne { get; set; }
 		internal string RelKey { get; set; }
 		internal string AwnKey { get; set; }
+		internal string DBGLGN { get; set; }
 		internal void setconf() 
 		{
 			string[] line = new string[6];
@@ -23,6 +24,7 @@ namespace Tortoise911
 			line [3] = Rngtne;
 			line [4] = RelKey;
 			line [5] = AwnKey;
+			line [6] = DBGLGN;
 			try
 			{
 				File.WriteAllLines(@"C:\ProgramData\NyxTel\config.nxt", line);
@@ -44,6 +46,7 @@ namespace Tortoise911
 				Rngtne = cfgshit[3];
 				RelKey = cfgshit[4];
 				AwnKey = cfgshit[5];
+				DBGLGN = cfgshit[6];
 			}
 			catch (Exception ex)
 			{

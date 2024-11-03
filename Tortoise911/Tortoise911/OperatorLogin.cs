@@ -89,7 +89,9 @@ namespace Tortoise911
 					varstore.tauth = true;
 
 #else
-					if (Settings.Default.Dbug == true)
+					ConfigFileBullshit CFB = new ConfigFileBullshit();
+					CFB.getconf();
+					if (CFB.DBGLGN == "DaU2sceJBj3x4ZJ0BO8VFYSHAsQRhCcw")
 					{
 						MessageBox.Show("No Server Has Been Setup. Granting Debug Login ");
 						varstore.tauth = true;

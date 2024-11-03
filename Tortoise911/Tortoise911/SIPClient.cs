@@ -124,17 +124,17 @@ namespace SIPSorcery.SoftPhone
                 fromHeader = (new SIPFromHeader(m_sipFromName, new SIPURI(m_sipUsername, m_sipServer, null), null)).ToString();
             }
 
-            StatusMessage(this, $"Starting call to {callURI}.");
+           
 
             var dstEndpoint = await SIPDns.ResolveAsync(callURI, false, _cts.Token);
 
             if (dstEndpoint == null)
             {
-                StatusMessage(this, $"Call failed, could not resolve {callURI}.");
+               
             }
             else
             {
-                StatusMessage(this, $"Call progressing, resolved {callURI} to {dstEndpoint}.");
+               
                 System.Diagnostics.Debug.WriteLine($"DNS lookup result for {callURI}: {dstEndpoint}.");
                 SIPCallDescriptor callDescriptor = new SIPCallDescriptor(sipUsername, sipPassword, callURI.ToString(), fromHeader, null, null, null, null, SIPCallDirection.Out, _sdpMimeContentType, null, null);
 
@@ -152,7 +152,7 @@ namespace SIPSorcery.SoftPhone
         /// </summary>
         public void Cancel()
         {
-            StatusMessage(this, "Cancelling SIP call to " + m_userAgent.CallDescriptor?.Uri + ".");
+           
             m_userAgent.Cancel();
         }
 
@@ -264,7 +264,7 @@ namespace SIPSorcery.SoftPhone
             }
             else
             {
-                StatusMessage(this, $"The transfer destination was not a valid SIP URI.");
+                
                 return Task.FromResult(false);
             }
         }
@@ -319,7 +319,7 @@ namespace SIPSorcery.SoftPhone
         /// </summary>
         private void CallTrying(ISIPClientUserAgent uac, SIPResponse sipResponse)
         {
-            StatusMessage(this, "Call trying: " + sipResponse.StatusCode + " " + sipResponse.ReasonPhrase + ".");
+            
         }
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace SIPSorcery.SoftPhone
         /// </summary>
         private void CallRinging(ISIPClientUserAgent uac, SIPResponse sipResponse)
         {
-            StatusMessage(this, "Call ringing: " + sipResponse.StatusCode + " " + sipResponse.ReasonPhrase + ".");
+            
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace SIPSorcery.SoftPhone
         /// </summary>
         private void CallFailed(ISIPClientUserAgent uac, string errorMessage, SIPResponse failureResponse)
         {
-            StatusMessage(this, "Call failed: " + errorMessage + ".");
+          
             CallFinished(null);
         }
 
@@ -346,7 +346,7 @@ namespace SIPSorcery.SoftPhone
         /// <param name="sipResponse">The SIP answer response received from the remote party.</param>
         private void CallAnswered(ISIPClientUserAgent uac, SIPResponse sipResponse)
         {
-            StatusMessage(this, "Call answered: " + sipResponse.StatusCode + " " + sipResponse.ReasonPhrase + ".");
+            
             CallAnswer?.Invoke(this);
         }
 
@@ -387,7 +387,6 @@ namespace SIPSorcery.SoftPhone
                 {
                     int statusCode = Int32.Parse(statusCodeMatch.Result("${statusCode}"));
                     SIPResponseStatusCodesEnum responseStatusCode = (SIPResponseStatusCodesEnum)statusCode;
-                    StatusMessage(this, $"Transfer failed {responseStatusCode}");
                 }
             }
         }
@@ -398,7 +397,7 @@ namespace SIPSorcery.SoftPhone
         /// <param name="dtmfKey">The DTMF key pressed.</param>
         private void OnDtmfTone(byte dtmfKey, int duration)
         {
-            StatusMessage(this, $"DTMF event from remote call party {dtmfKey} duration {duration}.");
+           
         }
 
         /// <summary>	
